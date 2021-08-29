@@ -20,7 +20,10 @@ class _MyAppState extends State<MyApp> {
       title: 'Override',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.grey,
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+        ),
       ),
       home: Diverge(),
     );

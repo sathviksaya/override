@@ -1,13 +1,16 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/screens/settings_screen.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
+import 'package:override/shared/group_card.dart';
+import 'package:override/shared/my_textfield.dart';
 import 'package:override/utils/google_auth.dart';
 import 'package:override/utils/page_surf.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
+
+  TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,18 +50,31 @@ class Home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  "Moon n Back",
-                  style: GoogleFonts.roboto(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            )
+            MyTextField(
+              controller: _searchController,
+              hint: "Search groups...",
+              icon: Icons.search,
+              myBorderRadius: 50,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            GroupCard(
+              name: "Class A, PESU",
+              description: "Update of Class A",
+              eventsNumber: 0,
+            ),
+            GroupCard(
+              name: "Class A, PESU",
+              description:
+                  "Update of Class AUpdate of Class AUpdate of Class AUpdate of Class AUpdate of Class AUpdate of Class AUpdate of Class AUpdate of Class AUpdate of Class A",
+              eventsNumber: 1,
+            ),
+            GroupCard(
+              name: "Class A, PESU",
+              description: "Update of Class A",
+              eventsNumber: 2,
+            ),
           ],
         ),
       ),
