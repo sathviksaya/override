@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "412099770373",
+    "project_id": "override-c26f4",
+    "storage_bucket": "override-c26f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412099770373:android:e148f6516b7f311b5c446c",
+        "android_client_info": {
+          "package_name": "com.example.override"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412099770373-2brro72g0s0tlsflj2mfmpgf01f0gu73.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.override",
+            "certificate_hash": "ebd127004e14136fecc501d39322c640792d1e27"
+          }
+        },
+        {
+          "client_id": "412099770373-6r29ibl62po4d5pni9juppma7tconumk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj6RdiZQUhlXugn2ZtmBnVmoNQJaWkdmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412099770373-6r29ibl62po4d5pni9juppma7tconumk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
