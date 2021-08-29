@@ -31,28 +31,29 @@
 </head>
 
 <body>
-	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
-	<!-- 
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+    <!-- 
 	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-messaging.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script> -->
-    <script> 
+	 -->
+    <script>
         // Your web app's Firebase configuration 
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional 
-        var firebaseConfig = { 
-        	apiKey: "AIzaSyD_h8Xq5H05obzYItKwyEfvmtvh9xJwYko", 
-        	authDomain: "override-c26f4.firebaseapp.com", 
-        	projectId: "override-c26f4",
-        	storageBucket: "override-c26f4.appspot.com", 
-        	messagingSenderId: "412099770373", 
-        	appId: "1:412099770373:web:38490e0a4cab9bf35c446c", 
-        	measurementId: "G-4VGEHGMMD6" 
-        }; 
+        var firebaseConfig = {
+            apiKey: "AIzaSyD_h8Xq5H05obzYItKwyEfvmtvh9xJwYko",
+            authDomain: "override-c26f4.firebaseapp.com",
+            projectId: "override-c26f4",
+            storageBucket: "override-c26f4.appspot.com",
+            messagingSenderId: "412099770373",
+            appId: "1:412099770373:web:38490e0a4cab9bf35c446c",
+            measurementId: "G-4VGEHGMMD6"
+        };
         // Initialize Firebase 
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
     </script>
     <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
@@ -92,7 +93,7 @@
                         if (!reg.active && (reg.installing || reg.waiting)) {
                             // No active web worker and we have installed or are installing
                             // one for the first time. Simply wait for it to activate.
-                            waitForActivation(reg.installing ?? reg.waiting);
+                            waitForActivation(reg.installing || reg.waiting);
                         } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
                             // When the app updates the serviceWorkerVersion changes, so we
                             // need to ask the service worker to update.
