@@ -20,32 +20,38 @@ class GroupTabView extends StatelessWidget {
         length: 3,
         child: Column(
           children: [
-            TabBar(
-              labelColor: Colors.white,
-              indicatorPadding: EdgeInsets.all(10),
-              labelPadding: EdgeInsets.all(5),
-              unselectedLabelColor: Colors.grey,
-              labelStyle: GoogleFonts.roboto(
-                fontSize: 15,
+            Theme(
+              data: ThemeData(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
               ),
-              unselectedLabelStyle: GoogleFonts.roboto(
-                fontSize: 15,
+              child: TabBar(
+                labelColor: Colors.white,
+                indicatorPadding: EdgeInsets.all(10),
+                labelPadding: EdgeInsets.all(5),
+                unselectedLabelColor: Colors.grey,
+                labelStyle: GoogleFonts.roboto(
+                  fontSize: 15,
+                ),
+                unselectedLabelStyle: GoogleFonts.roboto(
+                  fontSize: 15,
+                ),
+                indicator: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(13),
+                ),
+                tabs: const [
+                  Tab(
+                    child: Text("All"),
+                  ),
+                  Tab(
+                    child: Text("Today"),
+                  ),
+                  Tab(
+                    child: Text("Tomorrow"),
+                  ),
+                ],
               ),
-              indicator: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(13),
-              ),
-              tabs: const [
-                Tab(
-                  child: Text("All"),
-                ),
-                Tab(
-                  child: Text("Today"),
-                ),
-                Tab(
-                  child: Text("Tomorrow"),
-                ),
-              ],
             ),
             SizedBox(
               height: 10,
