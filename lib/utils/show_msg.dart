@@ -7,6 +7,7 @@ void showSnack(
   String msg, {
   Color color = Colors.amber,
   Color textColor = Colors.white,
+  int duration = 2,
 }) {
   final snackBar = SnackBar(
     backgroundColor: color,
@@ -16,7 +17,7 @@ void showSnack(
         color: textColor,
       ),
     ),
-    duration: const Duration(seconds: 1),
+    duration: Duration(seconds: duration),
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

@@ -5,9 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:override/screens/widgets/dialog_head.dart';
 import 'package:override/shared/my_textfield.dart';
 
-DateTime date = DateTime.now();
-
-class AddEditEvent extends StatelessWidget {
+class AddEditEvent extends StatefulWidget {
   final bool newEvent;
   final String? eventName;
   final String? eventTag;
@@ -22,10 +20,16 @@ class AddEditEvent extends StatelessWidget {
     this.eventDate,
   }) : super(key: key);
 
+  @override
+  State<AddEditEvent> createState() => _AddEditEventState();
+}
+
+class _AddEditEventState extends State<AddEditEvent> {
   final TextEditingController _eventController = TextEditingController();
   final TextEditingController _tagController = TextEditingController();
   final TextEditingController _infoController = TextEditingController();
-  // DateTime date = DateTime.now();
+
+  DateTime? date;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class AddEditEvent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DialogHead(
-                heading: newEvent ? "New Event" : "Edit Event",
+                heading: widget.newEvent ? "New Event" : "Edit Event",
               ),
               SizedBox(height: 20),
               dialogbody(context),
@@ -103,7 +107,7 @@ class AddEditEvent extends StatelessWidget {
             _tagController,
           ),
           SizedBox(height: 10),
-          PickDateTime(),
+          pickDateTime(),
           SizedBox(height: 10),
           labeledField(
             "Additional Info",
@@ -114,103 +118,75 @@ class AddEditEvent extends StatelessWidget {
         ],
       );
 
-  // Widget pickDateTime() => Container(
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.circular(15),
-  //         color: Colors.white10,
-  //       ),
-  //       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
-  //       child: DateTimeField(
-  //         decoration: InputDecoration(
-  //           prefixIcon: Icon(Icons.date_range_rounded),
-  //           border: InputBorder.none,
-  //           labelText: "Date",
-  //         ),
-  //         dateFormat: DateFormat("EE, dd MMM, h : mm a"),
-  //         onDateSelected: (DateTime selectedDate) {
-  //           setState(() {
-  //             date = selectedDate;
-  //           });
-  //         },
-  //         selectedDate: date,
-  //       ),
-  //     );
+  Widget pickDateTime() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              "Date & Time",
+              style: GoogleFonts.roboto(
+                color: Colors.black54,
+                fontWeight: FontWeight.normal,
+                fontSize: 12,
+              ),
+            ),
+          ),
+          SizedBox(height: 5),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.grey[200],
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+            child: Center(
+              child: DateTimeField(
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.date_range_rounded),
+                  border: InputBorder.none,
+                  fillColor: Colors.transparent,
+                  hintText: 'Date and time',
+                  // hintStyle: TextStyle(
+                  //   color: Colors.black45,
+                  //   fontSize: 13,
+                  // ),
+                ),
+                dateFormat: DateFormat("EE, dd MMM, h : mm a"),
+                onDateSelected: (DateTime selectedDate) {
+                  setState(() {
+                    date = selectedDate;
+                  });
+                },
+                selectedDate: date,
+              ),
+            ),
+          ),
+        ],
+      );
 
   Widget submitButton(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           TextButton(
-              child: SizedBox(
-                height: 30,
-                child: Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                ),
+            child: SizedBox(
+              height: 30,
+              child: Icon(
+                Icons.arrow_forward,
+                color: Colors.white,
               ),
-              style: ElevatedButton.styleFrom(
-                elevation: 10,
-                primary: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
+            ),
+            style: ElevatedButton.styleFrom(
+              elevation: 10,
+              primary: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
               ),
-              onPressed: () {
-                FocusScope.of(context).requestFocus(new FocusNode());
-                // TODO: add event logic
-              }),
+            ),
+            onPressed: () {
+              FocusScope.of(context).requestFocus(new FocusNode());
+              // TODO: add event logic
+            },
+          ),
         ],
       );
-}
-
-class PickDateTime extends StatefulWidget {
-  const PickDateTime({Key? key}) : super(key: key);
-
-  @override
-  _PickDateTimeState createState() => _PickDateTimeState();
-}
-
-class _PickDateTimeState extends State<PickDateTime> {
-  // DateTime date = DateTime.now();
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text(
-            "Date & Time",
-            style: GoogleFonts.roboto(
-              color: Colors.black54,
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-            ),
-          ),
-        ),
-        SizedBox(height: 5),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: Colors.grey[200],
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
-          child: DateTimeField(
-            decoration: InputDecoration(
-              prefixIcon: Icon(Icons.date_range_rounded),
-              border: InputBorder.none,
-              fillColor: Colors.transparent,
-              labelText: "Date",
-            ),
-            dateFormat: DateFormat("EE, dd MMM, h : mm a"),
-            onDateSelected: (DateTime selectedDate) {
-              setState(() {
-                date = selectedDate;
-              });
-            },
-            selectedDate: date,
-          ),
-        ),
-      ],
-    );
-  }
 }

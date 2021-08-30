@@ -77,7 +77,7 @@ class GroupScreen extends StatelessWidget {
               groupName,
               style: GoogleFonts.roboto(
                 color: Colors.black87,
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),

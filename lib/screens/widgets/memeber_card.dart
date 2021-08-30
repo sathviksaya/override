@@ -56,43 +56,45 @@ class MemberCard extends StatelessWidget {
   }
 
   Widget displayName(BuildContext context) => Flexible(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
+            Row(
+              children: [
+                Flexible(
+                  child: Text(
+                    name,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
+                    style: GoogleFonts.roboto(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 15),
+                if (isAdmin)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: displayAdmin(),
+                  ),
+              ],
+            ),
+            Container(
+              padding: const EdgeInsets.only(right: 20),
               child: Text(
-                name,
+                email,
                 softWrap: false,
-                overflow: TextOverflow.fade,
                 style: GoogleFonts.roboto(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black54,
                 ),
               ),
             ),
-            SizedBox(width: 15),
-            if (isAdmin) Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: displayAdmin(),
-            ),
           ],
         ),
-        Container(
-          padding: const EdgeInsets.only(right: 20),
-          child: Text(
-            email,
-            softWrap: false,
-            style: GoogleFonts.roboto(
-              fontSize: 13,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
+      );
 
   Widget displayAdmin() => Container(
         padding: const EdgeInsets.symmetric(

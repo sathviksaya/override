@@ -60,28 +60,31 @@ class DisplayMembers extends StatelessWidget {
             ),
           );
         }
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: snapshot.data!.docs.length,
-          itemBuilder: (itemBuilder, index) {
-            var data = snapshot.data!.docs[index];
-            return Column(
-              children: [
-                displayMember(
-                  data['name'],
-                  data['email'],
-                  data['imgUrl'],
-                  data['admin'],
-                ),
-                Divider(
-                  thickness: 1,
-                  endIndent: 30,
-                  indent: 30,
-                  color: Colors.black12,
-                ),
-              ],
-            );
-          },
+        return Expanded(
+          child: ListView.builder(
+            physics: ClampingScrollPhysics(),
+            // shrinkWrap: true,
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (itemBuilder, index) {
+              var data = snapshot.data!.docs[index];
+              return Column(
+                children: [
+                  displayMember(
+                    data['name'],
+                    data['email'],
+                    data['imgUrl'],
+                    data['admin'],
+                  ),
+                  Divider(
+                    thickness: 0.5,
+                    endIndent: 20,
+                    indent: 20,
+                    color: Colors.black12,
+                  ),
+                ],
+              );
+            },
+          ),
         );
       },
     );

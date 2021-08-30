@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:override/models/user.dart';
+import 'package:override/screens/group_screen/group_screen.dart';
 import 'package:override/shared/loading.dart';
+import 'package:override/utils/page_surf.dart';
 import 'package:override/utils/show_msg.dart';
 
 void createGroup(
@@ -38,35 +40,13 @@ void createGroup(
     'extension': extension,
   });
 
-  // Add user to members
-  await fbase
-      .collection('groups')
-      .doc(groupRef)
-      .collection('members')
-      .doc(Info.email)
-      .set({
-    'email': Info.email,
-    'name': Info.name,
-    'imgUrl': Info.imgUrl,
-    'admin': true,
-  });
+  addUserToGroup(
+    context,
+    groupRef,
+    groupName,
+    description,
+  );
 
-  // Add group to user's grouplist
-  await fbase
-      .collection('users')
-      .doc(Info.email)
-      .collection('inGroups')
-      .doc(groupRef)
-      .set({
-    'groupName': groupName,
-    'description': description,
-    'gorupRef': groupRef,
-    'groupId': Info.email,
-    'extension': extension,
-  });
-
-  Navigator.pop(context);
-  Navigator.pop(context);
   showSnack(
     context,
     'Group created successfully!',
@@ -83,7 +63,7 @@ void joinGroup(
 
   if (groupId.isEmpty || extension.isEmpty) {
     showToast('Please enter Group Id and Extension');
-    Navigator.pop(context);
+
     return;
   }
 
@@ -94,13 +74,21 @@ void joinGroup(
   await fbase.collection('groups').doc(groupRef).get().then((value) async {
     if (value.exists) {
       await addUserToGroup(
-          context, groupRef, value['groupName'], value['description']);
+        context,
+        groupRef,
+        value['groupName'],
+        value['description'],
+      );
+      showSnack(
+        context,
+        'Joined group successfully!',
+        color: Colors.green,
+      );
     } else {
       showToast('No group found!');
+      Navigator.pop(context);
     }
   });
-
-  Navigator.pop(context);
 }
 
 Future<void> addUserToGroup(
@@ -153,10 +141,15 @@ Future<void> addUserToGroup(
   });
 
   Navigator.pop(context);
-  showSnack(
+  Navigator.pop(context);
+
+  pushPage(
     context,
-    'Added!',
-    color: Colors.green,
+    GroupScreen(
+      groupId: Info.email!,
+      groupName: groupName,
+      extension: groupRef.split('###')[1],
+    ),
   );
 }
 
@@ -164,6 +157,35 @@ Future<void> leaveGroup(BuildContext context, String groupRef) async {
   loading(context);
 
   FirebaseFirestore fbase = FirebaseFirestore.instance;
+
+  bool isAdmin = true;
+
+  await fbase
+      .collection('groups')
+      .doc(groupRef)
+      .collection('members')
+      .doc(Info.email)
+      .get()
+      .then((value) {
+    if (value.exists) {
+      isAdmin = value['admin'];
+    }
+  });
+
+  if (isAdmin) {
+    log('user is admin');
+    showSnack(
+      context,
+      'You cannot leave the group! As you are an Admin.',
+      duration: 3,
+      color: Colors.red,
+    );
+    Navigator.pop(context);
+    Navigator.pop(context);
+    return;
+  }
+
+  log('user is not admin');
 
   await fbase
       .collection('users')
