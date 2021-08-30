@@ -50,6 +50,7 @@ class Home extends StatelessWidget {
         FilterMenu(
           options: homeMenu,
           optionIcons: homeMenuIcons,
+          icon: Icons.more_vert,
           onSelect: (choice) {
             FocusScope.of(context).requestFocus(new FocusNode());
             switch (choice) {

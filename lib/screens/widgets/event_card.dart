@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
@@ -6,7 +5,7 @@ import 'package:override/screens/widgets/dropdown_list.dart';
 class EventCard extends StatelessWidget {
   final String name;
   final String tag;
-  final String dateTime;
+  final DateTime dateTime;
   const EventCard({
     Key? key,
     required this.name,
@@ -69,11 +68,24 @@ class EventCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                GestureDetector(
-                  child: Icon(Icons.more_horiz),
-                  onTap: () {
-                    print((DateTime.now()));
-                    eventOption(context);
+                FilterMenu(
+                  options: eventMenu,
+                  optionIcons: eventMenuIcons,
+                  icon: Icons.more_horiz,
+                  onSelect: (choice) {
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    switch (choice) {
+                      case 'Edit':
+                        print("edit");
+                        break;
+                      // case 'Add to Calendar':
+                      //   break;
+                      case 'Delete':
+                        print("delete");
+                        break;
+                      default:
+                        break;
+                    }
                   },
                 ),
               ],
