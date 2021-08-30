@@ -4,13 +4,13 @@ class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
   final IconData icon;
-  final double myBorderRadius;
+  final double radius;
   const MyTextField({
     Key? key,
     required this.controller,
     required this.hint,
     required this.icon,
-    this.myBorderRadius = 15,
+    this.radius = 15,
   }) : super(key: key);
 
   @override
@@ -38,11 +38,11 @@ class MyTextField extends StatelessWidget {
           border: InputBorder.none,
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(myBorderRadius),
+            borderRadius: BorderRadius.circular(radius),
           ),
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(myBorderRadius),
+            borderRadius: BorderRadius.circular(radius),
           ),
           fillColor: Colors.grey[200],
           enabled: true,

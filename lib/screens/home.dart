@@ -26,24 +26,7 @@ class Home extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          FilterMenu(
-            options: home_menu,
-            optionIcons: home_menu_icons,
-            onSelect: (choice) {
-              switch (choice) {
-                case 'Settings':
-                  pushPage(context, Settings());
-                  break;
-                case 'Logout':
-                  signOut(context);
-                  break;
-                default:
-                  break;
-              }
-            },
-          ),
-        ],
+        actions: home_option(context),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -54,7 +37,7 @@ class Home extends StatelessWidget {
               controller: _searchController,
               hint: "Search groups...",
               icon: Icons.search,
-              myBorderRadius: 50,
+              radius: 50,
             ),
             SizedBox(
               height: 10,
@@ -80,6 +63,25 @@ class Home extends StatelessWidget {
       ),
     );
   }
+
+  List<Widget> home_option(BuildContext context) => [
+        FilterMenu(
+          options: home_menu,
+          optionIcons: home_menu_icons,
+          onSelect: (choice) {
+            switch (choice) {
+              case 'Settings':
+                pushPage(context, Settings());
+                break;
+              case 'Logout':
+                signOut(context);
+                break;
+              default:
+                break;
+            }
+          },
+        ),
+      ];
 
   List<String> home_menu = ['Settings'];
 
