@@ -17,25 +17,27 @@ class GroupDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DialogHead(
-              heading: create ? 'Create Group' : 'Join Group',
-            ),
-            SizedBox(height: 20),
-            dialogbody(context),
-            SizedBox(
-              height: 20,
-            ),
-            submitButton(context),
-            SizedBox(
-              height: 10,
-            ),
-          ],
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DialogHead(
+                heading: create ? 'Create Group' : 'Join Group',
+              ),
+              SizedBox(height: 20),
+              dialogbody(context),
+              SizedBox(
+                height: 20,
+              ),
+              submitButton(context),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );

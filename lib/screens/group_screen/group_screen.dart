@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:override/screens/group_screen/add_edit_event.dart';
 import 'package:override/screens/group_screen/group_tab_view.dart';
 import 'package:override/screens/group_screen/display_members.dart';
 import 'package:override/screens/group_screen/group_creds.dart';
@@ -48,6 +49,19 @@ class GroupScreen extends StatelessWidget {
     );
   }
 
+  void showAddEventSheet(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AddEditEvent(
+        newEvent: false,
+        eventName: 'Brian\'s Birthday',
+        eventDate: DateTime.now(),
+        eventInfo: "Remember to pick up the cake!",
+        eventTag: "Birthday",
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +87,9 @@ class GroupScreen extends StatelessWidget {
       ),
       body: GroupTabView(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showAddEventSheet(context);
+        },
         backgroundColor: Colors.black,
         child: Icon(
           Icons.add,
