@@ -92,6 +92,9 @@ Future<void> addUserToGroup(
 
   bool isInGroup = false;
 
+  String groupId = groupRef.split('###')[0];
+  String extension = groupRef.split('###')[1];
+
   // Check if user already in group
   await fbase
       .collection('groups')
@@ -113,7 +116,7 @@ Future<void> addUserToGroup(
       GroupScreen(
         groupId: Info.email!,
         groupName: groupName,
-        extension: groupRef.split('###')[1],
+        extension: extension,
       ),
     );
     showToast('You are already in the group!');
@@ -144,8 +147,8 @@ Future<void> addUserToGroup(
     'groupName': groupName,
     'description': description,
     'gorupRef': groupRef,
-    'groupId': groupRef.split('###')[0],
-    'extension': groupRef.split('###')[1],
+    'groupId': groupId,
+    'extension': extension,
   });
 
   Navigator.pop(context);
@@ -154,9 +157,9 @@ Future<void> addUserToGroup(
   pushPage(
     context,
     GroupScreen(
-      groupId: Info.email!,
+      groupId: groupId,
       groupName: groupName,
-      extension: groupRef.split('###')[1],
+      extension: extension,
     ),
   );
 

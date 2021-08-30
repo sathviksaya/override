@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -42,24 +44,29 @@ class DisplayMembers extends StatelessWidget {
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting ||
             snapshot.hasError) {
-          return Center(
-            child: SpinKitFadingCircle(
-              size: 20,
-              color: Colors.black54,
-            ),
-          );
-        }
-        if (snapshot.data!.docs.length == 0) {
-          return Center(
-            child: Text(
-              'No members...',
-              style: TextStyle(
+          return Expanded(
+            child: Center(
+              child: SpinKitFadingCircle(
+                size: 20,
                 color: Colors.black54,
-                fontSize: 14,
               ),
             ),
           );
         }
+        log(groupRef);
+        // if (snapshot.data!.docs.length == 0) {
+        //   return Expanded(
+        //     child: Center(
+        //       child: Text(
+        //         'No members...',
+        //         style: TextStyle(
+        //           color: Colors.black54,
+        //           fontSize: 14,
+        //         ),
+        //       ),
+        //     ),
+        //   );
+        // }
         return Expanded(
           child: ListView.builder(
             physics: ClampingScrollPhysics(),
