@@ -16,13 +16,20 @@ class GroupScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text(
-          'Shareminder',
-          style: GoogleFonts.roboto(
-            color: Colors.black87,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            backButton(context),
+            Spacer(),
+            Text(
+              groupName,
+              style: GoogleFonts.roboto(
+                color: Colors.black87,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
         actions: homeOption(context),
       ),
@@ -30,7 +37,21 @@ class GroupScreen extends StatelessWidget {
     );
   }
 
-  
+   Widget backButton(BuildContext context) => Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            child: IconButton(
+              color: Colors.black87,
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ],
+      );
+
   List<Widget> homeOption(BuildContext context) => [
         FilterMenu(
           options: homeMenu,
@@ -54,7 +75,12 @@ class GroupScreen extends StatelessWidget {
         ),
       ];
 
-  List<String> homeMenu = ['Members', 'Add People', 'Mute Events', 'Leave Group'];
+  List<String> homeMenu = [
+    'Members',
+    'Add People',
+    'Mute Events',
+    'Leave Group'
+  ];
 
   Map<String, List> homeMenuIcons = {
     'Members': [
@@ -66,7 +92,7 @@ class GroupScreen extends StatelessWidget {
       Colors.black87,
     ],
     'Mute Events': [
-      Icons.person_add,
+      Icons.volume_mute,
       Colors.black87,
     ],
     'Leave Group': [
