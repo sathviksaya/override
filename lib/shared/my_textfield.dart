@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
-  final IconData icon;
+  final IconData? icon;
   final double radius;
   final Function(String? val)? onChanged;
   const MyTextField({
     Key? key,
     required this.controller,
     required this.hint,
-    required this.icon,
+    this.icon,
     this.radius = 15,
     this.onChanged,
   }) : super(key: key);

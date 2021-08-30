@@ -52,6 +52,7 @@ class Home extends StatelessWidget {
           options: homeMenu,
           optionIcons: homeMenuIcons,
           onSelect: (choice) {
+            FocusScope.of(context).requestFocus(new FocusNode());
             switch (choice) {
               case 'Settings':
                 pushPage(context, Settings());
