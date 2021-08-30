@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/shared/my_textfield.dart';
+import 'package:override/utils/group_functions.dart';
 
 class GroupDialog extends StatelessWidget {
   final bool create;
@@ -15,7 +16,7 @@ class GroupDialog extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,6 +28,9 @@ class GroupDialog extends StatelessWidget {
             height: 20,
           ),
           submitButton(context),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );
@@ -34,11 +38,14 @@ class GroupDialog extends StatelessWidget {
 
   Widget dialoghead(BuildContext context) => Row(
         children: [
-          Text(
-            create ? 'Create Group' : 'Join Group',
-            style: GoogleFonts.roboto(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              create ? 'Create Group' : 'Join Group',
+              style: GoogleFonts.roboto(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+              ),
             ),
           ),
           Spacer(),
@@ -115,7 +122,11 @@ class GroupDialog extends StatelessWidget {
             ),
             onPressed: create
                 ? () {
-                    // TODO: create group function
+                    createGroup(
+                      context,
+                      controller1.text,
+                      controller2.text,
+                    );
                   }
                 : () {
                     // TODO: join group function
