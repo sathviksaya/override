@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -45,6 +46,27 @@ Future<void> signInWithGoogle(BuildContext context) async {
       email: googleUser.email,
       imgUrl: googleUser.photoUrl ?? 'Loading..',
     );
+
+    FirebaseFirestore fbase = FirebaseFirestore.instance;
+
+    bool userExists = false;
+
+    await fbase.collection('users').doc(Info.email).get().then((value) {
+      if (value.exists) {
+        log('Old user');
+        userExists = true;
+      } else {
+        log('New user');
+      }
+    });
+
+    if (!userExists) {
+      await fbase.collection('users').doc(Info.email).set({
+        'email': Info.email,
+        'name': Info.name,
+        'imgUrl': Info.imgUrl,
+      });
+    }
 
     Navigator.pop(context);
 
