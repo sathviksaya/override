@@ -58,7 +58,6 @@ void joinGroup(
 
   if (groupId.isEmpty || extension.isEmpty) {
     showToast('Please enter Group Id and Extension');
-
     return;
   }
 
@@ -133,7 +132,7 @@ Future<void> addUserToGroup(
       .set({
     'email': Info.email,
     'name': Info.name,
-    'imgUrl': Info.imgUrl,
+    'imgUrl': Info.imgUrl ?? '',
     'admin': create,
   });
 
