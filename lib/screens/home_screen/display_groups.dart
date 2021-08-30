@@ -15,11 +15,14 @@ class DisplayGroups extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            MyTextField(
-              controller: _searchController,
-              hint: "Search groups...",
-              icon: Icons.search,
-              radius: 50,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: MyTextField(
+                controller: _searchController,
+                hint: "Search groups...",
+                icon: Icons.search,
+                radius: 50,
+              ),
             ),
             SizedBox(
               height: 10,

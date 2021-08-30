@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'groupdialog.dart';
+
 class NewGroupDialog extends StatelessWidget {
   const NewGroupDialog({Key? key}) : super(key: key);
 
@@ -31,7 +33,17 @@ class NewGroupDialog extends StatelessWidget {
                     context,
                     'Create',
                     Icons.group_add,
-                    () {},
+                    () {
+                      Navigator.of(context).pop();
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        context: context,
+                        builder: (context) => GroupDialog(create: true),
+                      );
+                    },
                   ),
                   Container(
                     width: 1,
@@ -42,7 +54,17 @@ class NewGroupDialog extends StatelessWidget {
                     context,
                     'Join',
                     Icons.add_link,
-                    () {},
+                    () {
+                      Navigator.of(context).pop();
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        context: context,
+                        builder: (context) => GroupDialog(create: false),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -55,28 +77,30 @@ class NewGroupDialog extends StatelessWidget {
       ),
     );
   }
-
-  Widget dialoghead(BuildContext context) => Row(
-        children: [
-          SizedBox(
-            width: 10,
-          ),
-          Text(
-            'New group',
-            style: GoogleFonts.roboto(
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-            ),
-          ),
-          Spacer(),
-          IconButton(
-            splashRadius: 20,
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.close),
-          ),
-        ],
-      );
 }
+
+Widget dialoghead(BuildContext context) => Row(
+      children: [
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+          'New group',
+          style: GoogleFonts.roboto(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Spacer(),
+        IconButton(
+          splashRadius: 20,
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(
+            Icons.close,
+          ),
+        ),
+      ],
+    );
 
 Widget optionButton(
   BuildContext context,

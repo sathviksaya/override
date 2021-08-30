@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:override/screens/auth_&_settings/settings_screen.dart';
 import 'package:override/screens/home_screen/new_group_dialog.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
-import 'package:override/utils/google_auth.dart';
 import 'package:override/utils/page_surf.dart';
 
 import 'display_groups.dart';
@@ -29,6 +28,7 @@ class Home extends StatelessWidget {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Scaffold(
+        // resizeToAvoidBottomInset: true,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,

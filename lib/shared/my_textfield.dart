@@ -5,13 +5,17 @@ class MyTextField extends StatelessWidget {
   final String hint;
   final IconData? icon;
   final double radius;
+  final int lines;
+  final bool? obscureText;
   final Function(String? val)? onChanged;
   const MyTextField({
     Key? key,
     required this.controller,
     required this.hint,
     this.icon,
+    this.lines = 1,
     this.radius = 15,
+    this.obscureText,
     this.onChanged,
   }) : super(key: key);
 
@@ -21,13 +25,13 @@ class MyTextField extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 15),
       child: TextFormField(
         controller: controller,
         textCapitalization: TextCapitalization.sentences,
         keyboardType: TextInputType.text,
         cursorColor: Colors.black54,
         onChanged: onChanged,
+        maxLines: lines,
         style: TextStyle(color: Colors.black87),
         decoration: InputDecoration(
           hintText: hint,
