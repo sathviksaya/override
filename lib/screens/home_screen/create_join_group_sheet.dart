@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:override/screens/widgets/dialog_head.dart';
 import 'package:override/shared/my_textfield.dart';
 import 'package:override/utils/group_functions.dart';
 
@@ -12,52 +13,33 @@ class GroupDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
+    return Dialog(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          dialoghead(context),
-          SizedBox(height: 20),
-          dialogbody(context),
-          SizedBox(
-            height: 20,
-          ),
-          submitButton(context),
-          SizedBox(
-            height: 10,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DialogHead(
+              heading: create ? 'Create Group' : 'Join Group',
+            ),
+            SizedBox(height: 20),
+            dialogbody(context),
+            SizedBox(
+              height: 20,
+            ),
+            submitButton(context),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
       ),
     );
   }
-
-  Widget dialoghead(BuildContext context) => Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              create ? 'Create Group' : 'Join Group',
-              style: GoogleFonts.roboto(
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
-              ),
-            ),
-          ),
-          Spacer(),
-          IconButton(
-            splashRadius: 20,
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(
-              Icons.close,
-            ),
-          ),
-        ],
-      );
 
   Widget dialogbody(BuildContext context) => Container(
         child: Column(
@@ -73,7 +55,6 @@ class GroupDialog extends StatelessWidget {
               create ? 'Description' : 'Extension',
               create ? "Short description..." : "Ex: 123456",
               controller2,
-              // inputType: create ? TextInputType.text : TextInputType.phone,
             ),
           ],
         ),

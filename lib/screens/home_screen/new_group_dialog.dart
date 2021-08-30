@@ -11,18 +11,9 @@ class NewGroupDialog extends StatelessWidget {
 
   void showSheet(BuildContext context, bool flag) {
     Navigator.of(context).pop();
-    showModalBottomSheet(
-      isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+    showDialog(
       context: context,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: GroupDialog(create: flag),
-      ),
+      builder: (context) => GroupDialog(create: flag),
     );
   }
 
