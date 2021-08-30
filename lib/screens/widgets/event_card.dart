@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
 
 class EventCard extends StatelessWidget {
@@ -78,8 +79,9 @@ class EventCard extends StatelessWidget {
                       case 'Edit':
                         print("edit");
                         break;
-                      // case 'Add to Calendar':
-                      //   break;
+                      case 'Add to Calendar':
+                      print("Add to Calendar");
+                        break;
                       case 'Delete':
                         print("delete");
                         break;
@@ -100,7 +102,7 @@ class EventCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "8:30 AM",
+                      DateFormat.jm().format(dateTime),
                       style: GoogleFonts.roboto(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -108,7 +110,7 @@ class EventCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Sun, 28 Aug 2021",
+                      DateFormat.yMMMEd().format(dateTime),
                       style: GoogleFonts.roboto(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -126,31 +128,9 @@ class EventCard extends StatelessWidget {
   }
 }
 
-List<Widget> eventOption(BuildContext context) => [
-      FilterMenu(
-        options: eventMenu,
-        optionIcons: eventMenuIcons,
-        onSelect: (choice) {
-          FocusScope.of(context).requestFocus(new FocusNode());
-          switch (choice) {
-            case 'Edit':
-              print("edit");
-              break;
-            // case 'Add to Calendar':
-            //   break;
-            case 'Delete':
-              print("delete");
-              break;
-            default:
-              break;
-          }
-        },
-      ),
-    ];
-
 List<String> eventMenu = [
   'Edit',
-  // 'Add to Calendar',
+  'Add to Calendar',
   'Delete event',
 ];
 
@@ -159,14 +139,10 @@ Map<String, List> eventMenuIcons = {
     Icons.edit,
     Colors.black87,
   ],
-  // 'Add to Calendar': [
-  //   Switch(
-  //     value: true,
-  //     onChanged: (value) {
-  //       value = !value;
-  //     },
-  //   ),
-  // ],
+  'Add to Calendar': [
+    Icons.calendar_today,
+    Colors.black87,
+  ],
   'Delete event': [
     Icons.delete,
     Colors.red[300],
