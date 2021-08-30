@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
@@ -5,12 +6,12 @@ import 'package:override/screens/widgets/dropdown_list.dart';
 class EventCard extends StatelessWidget {
   final String name;
   final String tag;
-  final String? date;
+  final String dateTime;
   const EventCard({
     Key? key,
     required this.name,
     required this.tag,
-    required this.date,
+    required this.dateTime,
   }) : super(key: key);
 
   @override
@@ -38,13 +39,12 @@ class EventCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      color: Colors.green,
-                       width: MediaQuery.of(context).size.width * 0.6,
+                      width: MediaQuery.of(context).size.width * 0.7,
                       child: Text(
                         this.name,
-                        softWrap: true,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
                         style: GoogleFonts.roboto(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -70,10 +70,12 @@ class EventCard extends StatelessWidget {
                   ],
                 ),
                 GestureDetector(
-                    child: Icon(Icons.more_horiz),
-                    onTap: () {
-                      eventOption(context);
-                    }),
+                  child: Icon(Icons.more_horiz),
+                  onTap: () {
+                    print((DateTime.now()));
+                    eventOption(context);
+                  },
+                ),
               ],
             ),
             SizedBox(
@@ -120,10 +122,12 @@ List<Widget> eventOption(BuildContext context) => [
           FocusScope.of(context).requestFocus(new FocusNode());
           switch (choice) {
             case 'Edit':
+              print("edit");
               break;
-            case 'Add to Calendar':
-              break;
+            // case 'Add to Calendar':
+            //   break;
             case 'Delete':
+              print("delete");
               break;
             default:
               break;
@@ -132,17 +136,25 @@ List<Widget> eventOption(BuildContext context) => [
       ),
     ];
 
-List<String> eventMenu = ['Edit', 'Add to Calendar', 'Delete event'];
+List<String> eventMenu = [
+  'Edit',
+  // 'Add to Calendar',
+  'Delete event',
+];
 
 Map<String, List> eventMenuIcons = {
   'Edit': [
     Icons.edit,
     Colors.black87,
   ],
-  'Add to Calendar': [
-    Icons.settings,
-    Colors.black87,
-  ],
+  // 'Add to Calendar': [
+  //   Switch(
+  //     value: true,
+  //     onChanged: (value) {
+  //       value = !value;
+  //     },
+  //   ),
+  // ],
   'Delete event': [
     Icons.delete,
     Colors.red[300],

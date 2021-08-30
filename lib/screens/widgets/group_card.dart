@@ -43,6 +43,8 @@ class GroupCard extends StatelessWidget {
               children: [
                 Text(
                   this.name,
+                  maxLines: 1,
+                  softWrap: false,
                   style: GoogleFonts.roboto(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

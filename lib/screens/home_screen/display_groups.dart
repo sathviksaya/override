@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:override/screens/widgets/event_card.dart';
 import 'package:override/screens/widgets/group_card.dart';
 import 'package:override/shared/my_textfield.dart';
 
@@ -40,7 +41,7 @@ Widget showGroups() => Expanded(
         child: Column(
           children: [
             GroupCard(
-              name: "Class A, PESU",
+              name: "Class A, PESUClass A,PESUClass A,PESUClass A,PESUClass A,PESUClass A,PESUClass A, PESU",
               description: "Update of Class A",
               eventsNumber: 0,
             ),
@@ -55,6 +56,7 @@ Widget showGroups() => Expanded(
               description: "Update of Class A",
               eventsNumber: 2,
             ),
+            EventCard(name: "Class A, PESUClass A,PESUClass A,PESUClass A,PESUC", tag: "tag", dateTime: '')
           ],
         ),
       ),

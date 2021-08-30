@@ -14,7 +14,7 @@ class FilterMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
-      enableFeedback: true,
+      // enableFeedback: true,
       color: Colors.white,
       elevation: 20,
       tooltip: 'Options',
