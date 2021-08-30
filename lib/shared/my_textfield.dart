@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {
+  final TextInputType? inputType;
   final TextEditingController controller;
   final String hint;
   final IconData? icon;
@@ -17,6 +18,7 @@ class MyTextField extends StatelessWidget {
     this.radius = 15,
     this.obscureText,
     this.onChanged,
+    this.inputType,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,7 @@ class MyTextField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         textCapitalization: TextCapitalization.sentences,
-        keyboardType: TextInputType.text,
+        keyboardType: inputType,
         textInputAction: TextInputAction.next,
         cursorColor: Colors.black54,
         onChanged: onChanged,

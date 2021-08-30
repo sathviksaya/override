@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,10 @@ import 'package:override/shared/loading.dart';
 import 'package:override/utils/show_msg.dart';
 
 void createGroup(
-    BuildContext context, String groupName, String description) async {
+  BuildContext context,
+  String groupName,
+  String description,
+) async {
   loading(context);
 
   if (groupName.isEmpty) {
@@ -28,25 +30,39 @@ void createGroup(
 
   String groupRef = Info.email! + '###' + extension;
 
+  // Create group in groups
   await fbase.collection('groups').doc(groupRef).set({
     'groupName': groupName,
     'description': description,
     'groupId': Info.email,
     'extension': extension,
-    'admin': [
-      {
-        'email': Info.email,
-        'name': Info.name,
-        'imgUrl': Info.imgUrl,
-      },
-    ],
-    'users': [
-      {
-        'email': Info.email,
-        'name': Info.name,
-        'imgUrl': Info.imgUrl,
-      },
-    ],
+  });
+
+  // Add user to members
+  await fbase
+      .collection('groups')
+      .doc(groupRef)
+      .collection('members')
+      .doc(Info.email)
+      .set({
+    'email': Info.email,
+    'name': Info.name,
+    'imgUrl': Info.imgUrl,
+    'admin': true,
+  });
+
+  // Add group to user's grouplist
+  await fbase
+      .collection('users')
+      .doc(Info.email)
+      .collection('inGroups')
+      .doc(groupRef)
+      .set({
+    'groupName': groupName,
+    'description': description,
+    'gorupRef': groupRef,
+    'groupId': Info.email,
+    'extension': extension,
   });
 
   Navigator.pop(context);
@@ -54,6 +70,92 @@ void createGroup(
   showSnack(
     context,
     'Group created successfully!',
+    color: Colors.green,
+  );
+}
+
+void joinGroup(
+  BuildContext context,
+  String groupId,
+  String extension,
+) async {
+  loading(context);
+
+  if (groupId.isEmpty || extension.isEmpty) {
+    showToast('Please enter Group Id and Extension');
+    Navigator.pop(context);
+    return;
+  }
+
+  String groupRef = groupId + '###' + extension;
+
+  FirebaseFirestore fbase = FirebaseFirestore.instance;
+
+  await fbase.collection('groups').doc(groupRef).get().then((value) async {
+    if (value.exists) {
+      await addUserToGroup(
+          context, groupRef, value['groupName'], value['description']);
+    } else {
+      showToast('No group found!');
+    }
+  });
+
+  Navigator.pop(context);
+}
+
+Future<void> addUserToGroup(
+  BuildContext context,
+  String groupRef,
+  String groupName,
+  String description,
+) async {
+  FirebaseFirestore fbase = FirebaseFirestore.instance;
+
+  // Check if user already in group
+  await fbase
+      .collection('groups')
+      .doc(groupRef)
+      .collection('members')
+      .doc(Info.email)
+      .get()
+      .then((value) {
+    if (value.exists) {
+      showToast('You are already in the group!');
+      return;
+    }
+  });
+
+  // Add user into group members
+  await fbase
+      .collection('groups')
+      .doc(groupRef)
+      .collection('members')
+      .doc(Info.email)
+      .set({
+    'email': Info.email,
+    'name': Info.name,
+    'imgUrl': Info.imgUrl,
+    'admin': false,
+  });
+
+  // Add group into user's group list
+  await fbase
+      .collection('users')
+      .doc(Info.email)
+      .collection('inGroups')
+      .doc(groupRef)
+      .set({
+    'groupName': groupName,
+    'description': description,
+    'gorupRef': groupRef,
+    'groupId': groupRef.split('###')[0],
+    'extension': groupRef.split('###')[1],
+  });
+
+  Navigator.pop(context);
+  showSnack(
+    context,
+    'Added!',
     color: Colors.green,
   );
 }

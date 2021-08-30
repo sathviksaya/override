@@ -38,6 +38,7 @@ class FilterMenu extends StatelessWidget {
                 Icon(
                   optionIcons[choice]![0],
                   color: optionIcons[choice]![1],
+                  size: 17,
                 ),
                 SizedBox(
                   width: 10,
@@ -46,6 +47,7 @@ class FilterMenu extends StatelessWidget {
                   choice,
                   style: TextStyle(
                     color: optionIcons[choice]![1],
+                    fontSize: 14,
                   ),
                 ),
               ],

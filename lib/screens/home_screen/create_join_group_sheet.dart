@@ -73,13 +73,18 @@ class GroupDialog extends StatelessWidget {
               create ? 'Description' : 'Extension',
               create ? "Short description..." : "Ex: 123456",
               controller2,
+              // inputType: create ? TextInputType.text : TextInputType.phone,
             ),
           ],
         ),
       );
 
   Widget labeledField(
-          String label, String hint, TextEditingController controller) =>
+    String label,
+    String hint,
+    TextEditingController controller, {
+    TextInputType inputType = TextInputType.text,
+  }) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -96,6 +101,7 @@ class GroupDialog extends StatelessWidget {
           ),
           SizedBox(height: 5),
           MyTextField(
+            inputType: inputType,
             controller: controller,
             hint: hint,
           ),
@@ -122,6 +128,7 @@ class GroupDialog extends StatelessWidget {
             ),
             onPressed: create
                 ? () {
+                    FocusScope.of(context).requestFocus(new FocusNode());
                     createGroup(
                       context,
                       controller1.text,
@@ -129,7 +136,12 @@ class GroupDialog extends StatelessWidget {
                     );
                   }
                 : () {
-                    // TODO: join group function
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    joinGroup(
+                      context,
+                      controller1.text,
+                      controller2.text,
+                    );
                   },
           ),
         ],
