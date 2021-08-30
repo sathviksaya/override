@@ -45,12 +45,14 @@ void createGroup(
     groupRef,
     groupName,
     description,
+    create: true,
   );
 
   showSnack(
     context,
     'Group created successfully!',
     color: Colors.green,
+    duration: 3,
   );
 }
 
@@ -83,6 +85,7 @@ void joinGroup(
         context,
         'Joined group successfully!',
         color: Colors.green,
+        duration: 3,
       );
     } else {
       showToast('No group found!');
@@ -92,11 +95,8 @@ void joinGroup(
 }
 
 Future<void> addUserToGroup(
-  BuildContext context,
-  String groupRef,
-  String groupName,
-  String description,
-) async {
+    BuildContext context, String groupRef, String groupName, String description,
+    {bool create = false}) async {
   FirebaseFirestore fbase = FirebaseFirestore.instance;
 
   // Check if user already in group
@@ -123,7 +123,7 @@ Future<void> addUserToGroup(
     'email': Info.email,
     'name': Info.name,
     'imgUrl': Info.imgUrl,
-    'admin': false,
+    'admin': create,
   });
 
   // Add group into user's group list
@@ -153,7 +153,10 @@ Future<void> addUserToGroup(
   );
 }
 
-Future<void> leaveGroup(BuildContext context, String groupRef) async {
+Future<void> leaveGroup(
+  BuildContext context,
+  String groupRef,
+) async {
   loading(context);
 
   FirebaseFirestore fbase = FirebaseFirestore.instance;
