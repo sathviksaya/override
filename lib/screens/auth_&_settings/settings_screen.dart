@@ -56,31 +56,25 @@ class Settings extends StatelessWidget {
       );
 
   Widget displayPic(BuildContext context) {
-    Widget image;
-    try {
-      image = Image.network(
-        Info.imgUrl ?? '',
-        height: MediaQuery.of(context).size.shortestSide * 0.3,
-        fit: BoxFit.cover,
-      );
-    } catch (e) {
-      image = Image.asset(
-        'assets/images/user.png',
-        height: MediaQuery.of(context).size.shortestSide * 0.3,
-        fit: BoxFit.cover,
-      );
-    }
+    Widget image1, image2;
+    image1 = Image.network(
+      Info.imgUrl ?? '',
+      height: MediaQuery.of(context).size.shortestSide * 0.3,
+      fit: BoxFit.cover,
+    );
+    image2 = Image.asset(
+      'assets/images/user.png',
+      height: MediaQuery.of(context).size.shortestSide * 0.3,
+      fit: BoxFit.cover,
+    );
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
-        Center(
-          child: SpinKitFadingCircle(
-            color: Colors.black54,
-            size: 20,
-          ),
+        ClipOval(
+          child: image2,
         ),
         ClipOval(
-          child: image,
+          child: image1,
         ),
       ],
     );

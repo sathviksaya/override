@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/screens/auth_&_settings/settings_screen.dart';
+import 'package:override/screens/home_screen/new_group_dialog.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
 import 'package:override/utils/google_auth.dart';
 import 'package:override/utils/page_surf.dart';
@@ -10,6 +11,15 @@ import 'display_groups.dart';
 // ignore: must_be_immutable
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
+
+  void showNewGroupDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (builder) {
+        return NewGroupDialog();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +50,8 @@ class Home extends StatelessWidget {
               case 'Settings':
                 pushPage(context, Settings());
                 break;
-              case 'Logout':
-                signOut(context);
+              case 'New group':
+                showNewGroupDialog(context);
                 break;
               default:
                 break;
