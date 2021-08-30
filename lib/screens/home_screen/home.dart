@@ -23,10 +23,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // call this method here to hide soft keyboard
-        FocusScope.of(context).requestFocus(new FocusNode());
-      },
+      // onTap: () {
+      //   FocusScope.of(context).requestFocus(new FocusNode());
+      // },
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -52,7 +51,7 @@ class Home extends StatelessWidget {
           optionIcons: homeMenuIcons,
           icon: Icons.more_vert,
           onSelect: (choice) {
-            FocusScope.of(context).requestFocus(new FocusNode());
+            // FocusScope.of(context).requestFocus(new FocusNode());
             switch (choice) {
               case 'Settings':
                 pushPage(context, Settings());

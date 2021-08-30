@@ -1,14 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/screens/group_screen/display_events.dart';
+import 'package:override/screens/group_screen/display_members.dart';
+import 'package:override/screens/group_screen/group_creds.dart';
+import 'package:override/screens/group_screen/leave_group.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
 
 // ignore: must_be_immutable
 class GroupScreen extends StatelessWidget {
   final String groupId;
   final String groupName;
-  GroupScreen({Key? key, required this.groupId, required this.groupName})
+  final String extension;
+  GroupScreen(
+      {Key? key,
+      required this.groupId,
+      required this.groupName,
+      required this.extension})
       : super(key: key);
+
+  void showCreds(BuildContext context, int flag) {
+    showDialog(
+      context: context,
+      builder: (builder) {
+        switch (flag) {
+          case 0:
+            return DisplayMembers(groupRef: groupId + '###' + extension);
+
+          case 1:
+            return GroupCreds(
+              groupId: groupId,
+              extension: extension,
+            );
+
+          case 3:
+            return LeaveGroup(
+              groupName: groupName,
+              groupRef: groupId + '###' + extension,
+            );
+
+          default:
+            return GroupCreds(
+              groupId: groupId,
+              extension: extension,
+            );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +69,16 @@ class GroupScreen extends StatelessWidget {
             ),
           ],
         ),
-        actions: homeOption(context),
+        actions: groupOptions(context),
       ),
       body: DisplayEvents(),
     );
   }
 
-   Widget backButton(BuildContext context) => Row(
+  Widget backButton(BuildContext context) => Row(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
             child: IconButton(
               color: Colors.black87,
               icon: Icon(Icons.arrow_back_ios),
@@ -52,21 +90,24 @@ class GroupScreen extends StatelessWidget {
         ],
       );
 
-  List<Widget> homeOption(BuildContext context) => [
+  List<Widget> groupOptions(BuildContext context) => [
         FilterMenu(
-          options: homeMenu,
-          optionIcons: homeMenuIcons,
+          options: groupMenu,
+          optionIcons: groupMenuIcons,
           icon: Icons.more_vert,
           onSelect: (choice) {
             FocusScope.of(context).requestFocus(new FocusNode());
             switch (choice) {
               case 'Members':
+                showCreds(context, 0);
                 break;
               case 'Add People':
+                showCreds(context, 1);
                 break;
               case 'Mute Events':
                 break;
               case 'Leave Group':
+                showCreds(context, 3);
                 break;
               default:
                 break;
@@ -75,14 +116,14 @@ class GroupScreen extends StatelessWidget {
         ),
       ];
 
-  List<String> homeMenu = [
+  List<String> groupMenu = [
     'Members',
     'Add People',
     'Mute Events',
     'Leave Group'
   ];
 
-  Map<String, List> homeMenuIcons = {
+  Map<String, List> groupMenuIcons = {
     'Members': [
       Icons.group,
       Colors.black87,

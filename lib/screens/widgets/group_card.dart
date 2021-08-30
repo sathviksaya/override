@@ -4,15 +4,19 @@ import 'package:override/screens/group_screen/group_screen.dart';
 import 'package:override/utils/page_surf.dart';
 
 class GroupCard extends StatelessWidget {
-  final String name;
+  final String groupName;
+  final String groupId;
   final String description;
+  final String extension;
   final int eventsNumber;
-  const GroupCard(
-      {Key? key,
-      required this.name,
-      required this.description,
-      required this.eventsNumber})
-      : super(key: key);
+  const GroupCard({
+    Key? key,
+    required this.groupName,
+    required this.description,
+    required this.eventsNumber,
+    required this.extension,
+    required this.groupId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,11 @@ class GroupCard extends StatelessWidget {
       onTap: () {
         pushPage(
           context,
-          GroupScreen(groupId: 'groupId', groupName: 'groupName'),
+          GroupScreen(
+            groupId: groupId,
+            groupName: groupName,
+            extension: extension,
+          ),
         );
       },
       child: Card(
@@ -51,7 +59,7 @@ class GroupCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    this.name,
+                    this.groupName,
                     maxLines: 1,
                     softWrap: false,
                     style: GoogleFonts.roboto(
@@ -88,7 +96,8 @@ class GroupCard extends StatelessWidget {
                     style: GoogleFonts.roboto(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: this.eventsNumber == 0 ? Colors.grey : Colors.amber,
+                      color:
+                          this.eventsNumber == 0 ? Colors.grey : Colors.amber,
                     ),
                   ),
                 ],

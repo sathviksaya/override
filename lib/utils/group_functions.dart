@@ -159,3 +159,27 @@ Future<void> addUserToGroup(
     color: Colors.green,
   );
 }
+
+Future<void> leaveGroup(BuildContext context, String groupRef) async {
+  loading(context);
+
+  FirebaseFirestore fbase = FirebaseFirestore.instance;
+
+  await fbase
+      .collection('users')
+      .doc(Info.email)
+      .collection('inGroups')
+      .doc(groupRef)
+      .delete();
+
+  await fbase
+      .collection('groups')
+      .doc(groupRef)
+      .collection('members')
+      .doc(Info.email)
+      .delete();
+
+  Navigator.pop(context);
+  Navigator.pop(context);
+  Navigator.pop(context);
+}
