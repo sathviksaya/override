@@ -24,10 +24,14 @@ class GroupCard extends StatelessWidget {
     }
 
     return Card(
-      elevation: 0.3,
+      elevation: 20,
+      shadowColor: Colors.white38,
       margin: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 5,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -80,9 +84,6 @@ class GroupCard extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
       ),
     );
   }
