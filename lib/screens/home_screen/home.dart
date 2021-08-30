@@ -23,21 +23,27 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text(
-          'Shareminder',
-          style: GoogleFonts.roboto(
-            color: Colors.black87,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {
+        // call this method here to hide soft keyboard
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Text(
+            'Shareminder',
+            style: GoogleFonts.roboto(
+              color: Colors.black87,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          actions: homeOption(context),
         ),
-        actions: homeOption(context),
+        body: DisplayGroups(),
       ),
-      body: DisplayGroups(),
     );
   }
 

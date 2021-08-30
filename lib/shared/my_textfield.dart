@@ -5,12 +5,14 @@ class MyTextField extends StatelessWidget {
   final String hint;
   final IconData icon;
   final double radius;
+  final Function(String? val)? onChanged;
   const MyTextField({
     Key? key,
     required this.controller,
     required this.hint,
     required this.icon,
     this.radius = 15,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -25,10 +27,8 @@ class MyTextField extends StatelessWidget {
         textCapitalization: TextCapitalization.sentences,
         keyboardType: TextInputType.text,
         cursorColor: Colors.black54,
-        onChanged: (String? val) {
-          controller.text = val!;
-        },
-        style: TextStyle(color: Colors.black54),
+        onChanged: onChanged,
+        style: TextStyle(color: Colors.black87),
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: TextStyle(

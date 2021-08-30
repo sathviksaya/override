@@ -13,41 +13,44 @@ class NewGroupDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       insetPadding: const EdgeInsets.all(30),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            dialoghead(context),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                optionButton(
-                  context,
-                  'Create',
-                  Icons.group_add,
-                  () {},
-                ),
-                Container(
-                  width: 1,
-                  height: 100,
-                  color: Colors.black26,
-                ),
-                optionButton(
-                  context,
-                  'Join',
-                  Icons.add_link,
-                  () {},
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-          ],
+      child: SizedBox(
+        width: 400,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              dialoghead(context),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  optionButton(
+                    context,
+                    'Create',
+                    Icons.group_add,
+                    () {},
+                  ),
+                  Container(
+                    width: 1,
+                    height: 100,
+                    color: Colors.black26,
+                  ),
+                  optionButton(
+                    context,
+                    'Join',
+                    Icons.add_link,
+                    () {},
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+            ],
+          ),
         ),
       ),
     );
