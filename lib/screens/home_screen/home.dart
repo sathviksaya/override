@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:override/screens/auth_settings/settings_screen.dart';
+import 'package:override/screens/auth_&_settings/settings_screen.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
 import 'package:override/utils/google_auth.dart';
 import 'package:override/utils/page_surf.dart';

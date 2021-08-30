@@ -29,24 +29,7 @@ class Settings extends StatelessWidget {
   Widget displayInfo(BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              Center(
-                child: SpinKitFadingCircle(
-                  color: Colors.black54,
-                  size: 20,
-                ),
-              ),
-              ClipOval(
-                child: Image.network(
-                  Info.imgUrl ?? '',
-                  height: MediaQuery.of(context).size.shortestSide * 0.3,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
-          ),
+          displayPic(context),
           SizedBox(
             height: 15,
           ),
@@ -71,6 +54,37 @@ class Settings extends StatelessWidget {
           ),
         ],
       );
+
+  Widget displayPic(BuildContext context) {
+    Widget image;
+    try {
+      image = Image.network(
+        Info.imgUrl ?? '',
+        height: MediaQuery.of(context).size.shortestSide * 0.3,
+        fit: BoxFit.cover,
+      );
+    } catch (e) {
+      image = Image.asset(
+        'assets/images/user.png',
+        height: MediaQuery.of(context).size.shortestSide * 0.3,
+        fit: BoxFit.cover,
+      );
+    }
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        Center(
+          child: SpinKitFadingCircle(
+            color: Colors.black54,
+            size: 20,
+          ),
+        ),
+        ClipOval(
+          child: image,
+        ),
+      ],
+    );
+  }
 
   Widget backButton(BuildContext context) => Row(
         children: [

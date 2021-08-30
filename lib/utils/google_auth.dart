@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:override/models/user.dart';
-import 'package:override/screens/auth_settings/auth.dart';
+import 'package:override/screens/auth_&_settings/auth.dart';
 import 'package:override/screens/home_screen/home.dart';
 import 'package:override/shared/loading.dart';
 import 'package:override/utils/page_surf.dart';
