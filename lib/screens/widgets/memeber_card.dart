@@ -21,7 +21,7 @@ class MemberCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(width: 30),
+          SizedBox(width: 15),
           displayPic(),
           SizedBox(width: 10),
           displayName(context),
@@ -55,42 +55,44 @@ class MemberCard extends StatelessWidget {
     );
   }
 
-  Widget displayName(BuildContext context) => Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+  Widget displayName(BuildContext context) => Flexible(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
           children: [
-            Row(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.33,
-                  child: Text(
-                    name,
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                    style: GoogleFonts.roboto(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 15),
-                if (isAdmin) displayAdmin(),
-              ],
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.4,
+            Flexible(
               child: Text(
-                email,
+                name,
                 softWrap: false,
+                overflow: TextOverflow.fade,
                 style: GoogleFonts.roboto(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w300,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
+            SizedBox(width: 15),
+            if (isAdmin) Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: displayAdmin(),
+            ),
           ],
         ),
-      );
+        Container(
+          padding: const EdgeInsets.only(right: 20),
+          child: Text(
+            email,
+            softWrap: false,
+            style: GoogleFonts.roboto(
+              fontSize: 13,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 
   Widget displayAdmin() => Container(
         padding: const EdgeInsets.symmetric(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:override/screens/group_screen/display_events.dart';
+import 'package:override/screens/group_screen/group_tab_view.dart';
 import 'package:override/screens/group_screen/display_members.dart';
 import 'package:override/screens/group_screen/group_creds.dart';
 import 'package:override/screens/group_screen/leave_group.dart';
@@ -71,7 +71,15 @@ class GroupScreen extends StatelessWidget {
         ),
         actions: groupOptions(context),
       ),
-      body: DisplayEvents(),
+      body: GroupTabView(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.black,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 

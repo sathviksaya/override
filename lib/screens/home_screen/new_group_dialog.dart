@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:override/screens/widgets/dialog_head.dart';
 
 import 'create_join_group_sheet.dart';
 
@@ -39,7 +40,7 @@ class NewGroupDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              dialoghead(context),
+              DialogHead(heading: 'New Group'),
               SizedBox(
                 height: 15,
               ),
@@ -79,29 +80,6 @@ class NewGroupDialog extends StatelessWidget {
     );
   }
 }
-
-Widget dialoghead(BuildContext context) => Row(
-      children: [
-        SizedBox(
-          width: 10,
-        ),
-        Text(
-          'New group',
-          style: GoogleFonts.roboto(
-            fontWeight: FontWeight.bold,
-            fontSize: 17,
-          ),
-        ),
-        Spacer(),
-        IconButton(
-          splashRadius: 20,
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(
-            Icons.close,
-          ),
-        ),
-      ],
-    );
 
 Widget optionButton(
   BuildContext context,
