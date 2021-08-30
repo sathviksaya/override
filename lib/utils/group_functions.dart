@@ -162,7 +162,7 @@ Future<void> addUserToGroup(
 
   showSnack(
     context,
-    create ? 'Joined group successfully!' : 'Group created successfully!',
+    !create ? 'Joined group successfully!' : 'Group created successfully!',
     color: Colors.green,
     duration: 3,
   );
