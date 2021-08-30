@@ -11,23 +11,23 @@ class GroupDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        height: MediaQuery.of(context).size.height * 0.45,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            dialoghead(context),
-            SizedBox(height: 20),
-            dialogbody(context),
-            Spacer(),
-            submitButton(context),
-          ],
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          dialoghead(context),
+          SizedBox(height: 20),
+          dialogbody(context),
+          SizedBox(
+            height: 20,
+          ),
+          submitButton(context),
+        ],
       ),
     );
   }
@@ -56,51 +56,61 @@ class GroupDialog extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            labeledField(
               create ? 'Group Name' : 'Group ID',
-              style: GoogleFonts.roboto(
-                fontWeight: FontWeight.normal,
-                fontSize: 12,
-              ),
-            ),
-            SizedBox(height: 10),
-            MyTextField(
-              controller: controller1,
-              hint: create ? "Enter the group name" : "Enter the group id",
+              create ? "Enter the group name" : "Enter the group id",
+              controller1,
             ),
             SizedBox(height: 20),
-            Text(
+            labeledField(
               create ? 'Description' : 'Extension',
-              style: GoogleFonts.roboto(
-                fontWeight: FontWeight.normal,
-                fontSize: 12,
-              ),
-            ),
-            SizedBox(height: 10),
-            MyTextField(
-              controller: controller2,
-              lines: create ? 3 : 1,
-              hint: create
-                  ? "What the group is about..."
-                  : "Enter the secret extension",
-              obscureText: create ? false : true,
+              create ? "Short description..." : "Ex: 123456",
+              controller2,
             ),
           ],
         ),
+      );
+
+  Widget labeledField(
+          String label, String hint, TextEditingController controller) =>
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              label,
+              style: GoogleFonts.roboto(
+                color: Colors.black54,
+                fontWeight: FontWeight.normal,
+                fontSize: 12,
+              ),
+            ),
+          ),
+          SizedBox(height: 5),
+          MyTextField(
+            controller: controller,
+            hint: hint,
+          ),
+        ],
       );
 
   Widget submitButton(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           TextButton(
-            child: Icon(
-              Icons.arrow_forward,
-              color: Colors.white,
+            child: SizedBox(
+              height: 30,
+              child: Icon(
+                Icons.arrow_forward,
+                color: Colors.white,
+              ),
             ),
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.black,
+            style: ElevatedButton.styleFrom(
+              elevation: 10,
+              primary: Colors.black,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
               ),
             ),
             onPressed: create

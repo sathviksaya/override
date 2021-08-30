@@ -28,7 +28,6 @@ class Home extends StatelessWidget {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Scaffold(
-        // resizeToAvoidBottomInset: true,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,

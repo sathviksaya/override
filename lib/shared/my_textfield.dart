@@ -29,6 +29,7 @@ class MyTextField extends StatelessWidget {
         controller: controller,
         textCapitalization: TextCapitalization.sentences,
         keyboardType: TextInputType.text,
+        textInputAction: TextInputAction.next,
         cursorColor: Colors.black54,
         onChanged: onChanged,
         maxLines: lines,

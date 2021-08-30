@@ -3,10 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'groupdialog.dart';
+import 'create_join_group_sheet.dart';
 
 class NewGroupDialog extends StatelessWidget {
   const NewGroupDialog({Key? key}) : super(key: key);
+
+  void showSheet(BuildContext context, bool flag) {
+    Navigator.of(context).pop();
+    showModalBottomSheet(
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      context: context,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: GroupDialog(create: flag),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +51,7 @@ class NewGroupDialog extends StatelessWidget {
                     'Create',
                     Icons.group_add,
                     () {
-                      Navigator.of(context).pop();
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        context: context,
-                        builder: (context) => GroupDialog(create: true),
-                      );
+                      showSheet(context, true);
                     },
                   ),
                   Container(
@@ -55,15 +64,7 @@ class NewGroupDialog extends StatelessWidget {
                     'Join',
                     Icons.add_link,
                     () {
-                      Navigator.of(context).pop();
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        context: context,
-                        builder: (context) => GroupDialog(create: false),
-                      );
+                      showSheet(context, false);
                     },
                   ),
                 ],
