@@ -47,13 +47,6 @@ void createGroup(
     description,
     create: true,
   );
-
-  showSnack(
-    context,
-    'Group created successfully!',
-    color: Colors.green,
-    duration: 3,
-  );
 }
 
 void joinGroup(
@@ -81,12 +74,6 @@ void joinGroup(
         value['groupName'],
         value['description'],
       );
-      showSnack(
-        context,
-        'Joined group successfully!',
-        color: Colors.green,
-        duration: 3,
-      );
     } else {
       showToast('No group found!');
       Navigator.pop(context);
@@ -95,9 +82,15 @@ void joinGroup(
 }
 
 Future<void> addUserToGroup(
-    BuildContext context, String groupRef, String groupName, String description,
-    {bool create = false}) async {
+  BuildContext context,
+  String groupRef,
+  String groupName,
+  String description, {
+  bool create = false,
+}) async {
   FirebaseFirestore fbase = FirebaseFirestore.instance;
+
+  bool isInGroup = false;
 
   // Check if user already in group
   await fbase
@@ -108,10 +101,25 @@ Future<void> addUserToGroup(
       .get()
       .then((value) {
     if (value.exists) {
-      showToast('You are already in the group!');
-      return;
+      isInGroup = true;
     }
   });
+
+  if (isInGroup) {
+    Navigator.pop(context);
+    Navigator.pop(context);
+    pushPage(
+      context,
+      GroupScreen(
+        groupId: Info.email!,
+        groupName: groupName,
+        extension: groupRef.split('###')[1],
+      ),
+    );
+    showToast('You are already in the group!');
+
+    return;
+  }
 
   // Add user into group members
   await fbase
@@ -150,6 +158,13 @@ Future<void> addUserToGroup(
       groupName: groupName,
       extension: groupRef.split('###')[1],
     ),
+  );
+
+  showSnack(
+    context,
+    create ? 'Joined group successfully!' : 'Group created successfully!',
+    color: Colors.green,
+    duration: 3,
   );
 }
 

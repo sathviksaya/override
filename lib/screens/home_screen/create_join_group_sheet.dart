@@ -57,6 +57,7 @@ class GroupDialog extends StatelessWidget {
               create ? 'Description' : 'Extension',
               create ? "Short description..." : "Ex: 123456",
               controller2,
+              inputType: create ? TextInputType.text : TextInputType.number,
             ),
           ],
         ),
