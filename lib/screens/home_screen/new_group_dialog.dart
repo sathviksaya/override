@@ -12,7 +12,7 @@ class NewGroupDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-      insetPadding: EdgeInsets.all(30),
+      insetPadding: const EdgeInsets.all(30),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -22,20 +22,30 @@ class NewGroupDialog extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            optionButton(
-              context,
-              'Create group',
-              Icons.group_add,
-              () {},
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                optionButton(
+                  context,
+                  'Create',
+                  Icons.group_add,
+                  () {},
+                ),
+                Container(
+                  width: 1,
+                  height: 100,
+                  color: Colors.black26,
+                ),
+                optionButton(
+                  context,
+                  'Join',
+                  Icons.add_link,
+                  () {},
+                ),
+              ],
             ),
             SizedBox(
-              height: 10,
-            ),
-            optionButton(
-              context,
-              'Join group',
-              Icons.add_link,
-              () {},
+              height: 15,
             ),
           ],
         ),
@@ -71,35 +81,39 @@ Widget optionButton(
   IconData icon,
   Function() onPressed,
 ) =>
-    ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        elevation: 10,
-        primary: Colors.black87,
+    TextButton(
+      style: TextButton.styleFrom(
+        primary: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
         padding: EdgeInsets.symmetric(
           vertical: 10,
+          horizontal: 10,
         ),
       ),
       onPressed: onPressed,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-          ),
-          SizedBox(
-            width: 15,
-          ),
-          Text(
-            name,
-            style: GoogleFonts.roboto(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+      child: Container(
+        width: 100,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: Colors.black,
+              size: 50,
             ),
-          ),
-        ],
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              name,
+              style: GoogleFonts.roboto(
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
       ),
     );
