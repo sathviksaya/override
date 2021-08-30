@@ -17,13 +17,14 @@ class MemberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(width: 30),
           displayPic(),
           SizedBox(width: 10),
-          displayName(),
+          displayName(context),
         ],
       ),
     );
@@ -54,28 +55,37 @@ class MemberCard extends StatelessWidget {
     );
   }
 
-  Widget displayName() => Container(
+  Widget displayName(BuildContext context) => Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Text(
-                  name,
-                  style: GoogleFonts.roboto(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.33,
+                  child: Text(
+                    name,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
+                    style: GoogleFonts.roboto(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 SizedBox(width: 15),
                 if (isAdmin) displayAdmin(),
               ],
             ),
-            Text(
-              email,
-              style: GoogleFonts.roboto(
-                fontSize: 13,
-                fontWeight: FontWeight.w300,
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: Text(
+                email,
+                softWrap: false,
+                style: GoogleFonts.roboto(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
             ),
           ],
