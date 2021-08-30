@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:override/screens/widgets/event_card.dart';
 
 class DisplayEvents extends StatelessWidget {
@@ -12,12 +13,59 @@ class DisplayEvents extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            showEvents(),
+            tab(context),
           ],
         ),
       ),
     );
   }
+
+  Widget tab(BuildContext context) => DefaultTabController(
+    initialIndex: 1,
+    length: 3,    
+    child: Column(
+      children: [
+        TabBar(
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.grey,
+          labelStyle: GoogleFonts.roboto(
+            fontSize: 15,
+          ),
+          unselectedLabelStyle: GoogleFonts.roboto(
+            fontSize: 15,
+          ),
+          indicator: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          tabs: [
+            Tab(
+              child: Text("All"),
+            ),
+            Tab(
+              child: Text("Today"),
+            ),
+            Tab(
+              child: Text("Tomorrow"),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 500,
+          child: TabBarView(
+            children: [
+              Text("kjakljda"),
+              Text("kjakljda"),
+              Text("kjakljda"),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 
   Widget showEvents() => Expanded(
         child: SingleChildScrollView(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:override/screens/widgets/dialog_head.dart';
+import 'package:override/screens/widgets/memeber_card.dart';
 
 class DisplayMembers extends StatelessWidget {
   final String groupRef;
@@ -64,11 +65,21 @@ class DisplayMembers extends StatelessWidget {
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (itemBuilder, index) {
             var data = snapshot.data!.docs[index];
-            return displayMember(
-              data['name'],
-              data['email'],
-              data['imgUrl'],
-              data['admin'],
+            return Column(
+              children: [
+                displayMember(
+                  data['name'],
+                  data['email'],
+                  data['imgUrl'],
+                  data['admin'],
+                ),
+                Divider(
+                  thickness: 1,
+                  endIndent: 30,
+                  indent: 30,
+                  color: Colors.black12,
+                ),
+              ],
             );
           },
         );
@@ -77,6 +88,11 @@ class DisplayMembers extends StatelessWidget {
   }
 
   Widget displayMember(String name, String email, String imgUrl, bool isAdmin) {
-    return Text(name);
+    return MemberCard(
+      name: name,
+      email: email,
+      imgUrl: imgUrl,
+      isAdmin: isAdmin,
+    );
   }
 }
