@@ -32,10 +32,13 @@ class MemberCard extends StatelessWidget {
 
   Widget displayPic() {
     Widget image1, image2;
-    image1 = Image.network(
-      imgUrl,
-      height: 50,
-      fit: BoxFit.cover,
+    image1 = Container(
+      color: Colors.white,
+      child: Image.network(
+        imgUrl,
+        height: 50,
+        fit: BoxFit.cover,
+      ),
     );
     image2 = Image.asset(
       'assets/images/user.png',

@@ -113,7 +113,7 @@ Future<void> addUserToGroup(
     pushPage(
       context,
       GroupScreen(
-        groupId: Info.email!,
+        groupId: groupId,
         groupName: groupName,
         extension: extension,
       ),
@@ -132,7 +132,8 @@ Future<void> addUserToGroup(
       .set({
     'email': Info.email,
     'name': Info.name,
-    'imgUrl': Info.imgUrl ?? '',
+    'imgUrl':
+        Info.imgUrl ?? 'https://dunnvision.com/files/2019/05/Profile-512.png',
     'admin': create,
   });
 

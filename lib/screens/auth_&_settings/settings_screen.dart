@@ -56,10 +56,13 @@ class Settings extends StatelessWidget {
 
   Widget displayPic(BuildContext context) {
     Widget image1, image2;
-    image1 = Image.network(
-      Info.imgUrl ?? '',
-      height: MediaQuery.of(context).size.shortestSide * 0.3,
-      fit: BoxFit.cover,
+    image1 = Container(
+      color: Colors.white,
+      child: Image.network(
+        Info.imgUrl ?? 'https://dunnvision.com/files/2019/05/Profile-512.png',
+        height: MediaQuery.of(context).size.shortestSide * 0.3,
+        fit: BoxFit.cover,
+      ),
     );
     image2 = Image.asset(
       'assets/images/user.png',
