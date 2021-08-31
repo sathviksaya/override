@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:override/screens/group_screen/add_edit_event.dart';
+import 'package:override/models/event.dart';
+import 'package:override/models/user.dart';
+import 'package:override/screens/group_screen/events/add_edit_event.dart';
 import 'package:override/screens/group_screen/group_tab_view.dart';
 import 'package:override/screens/group_screen/display_members.dart';
 import 'package:override/screens/group_screen/group_creds.dart';
@@ -12,12 +14,12 @@ class GroupScreen extends StatelessWidget {
   final String groupId;
   final String groupName;
   final String extension;
-  GroupScreen(
-      {Key? key,
-      required this.groupId,
-      required this.groupName,
-      required this.extension})
-      : super(key: key);
+  GroupScreen({
+    Key? key,
+    required this.groupId,
+    required this.groupName,
+    required this.extension,
+  }) : super(key: key);
 
   void showCreds(BuildContext context, int flag) {
     showDialog(
@@ -50,14 +52,19 @@ class GroupScreen extends StatelessWidget {
   }
 
   void showAddEventSheet(BuildContext context) {
+    Event event = Event(
+      'Supreet',
+      'Hello',
+      DateTime.now(),
+      'Extra...',
+      Info.email!,
+    );
     showDialog(
       context: context,
       builder: (context) => AddEditEvent(
-        newEvent: false,
-        eventName: 'Brian\'s Birthday',
-        eventDate: DateTime.now(),
-        eventInfo: "Remember to pick up the cake!",
-        eventTag: "Birthday",
+        newEvent: true,
+        groupRef: groupId + '###' + extension,
+        // event: event,
       ),
     );
   }
@@ -85,7 +92,9 @@ class GroupScreen extends StatelessWidget {
         ),
         actions: groupOptions(context),
       ),
-      body: GroupTabView(),
+      body: GroupTabView(
+        groupRef: groupId + '###' + extension,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showAddEventSheet(context);

@@ -1,18 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:override/models/event.dart';
+import 'package:override/screens/group_screen/events/add_edit_event.dart';
+import 'package:override/screens/group_screen/events/confirm_delete.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
 
 class EventCard extends StatelessWidget {
-  final String name;
-  final String tag;
-  final DateTime dateTime;
+  final String groupRef;
+  final Event event;
   const EventCard({
     Key? key,
-    required this.name,
-    required this.tag,
-    required this.dateTime,
+    required this.groupRef,
+    required this.event,
   }) : super(key: key);
+
+  void _eventOption(BuildContext context, int flag) {
+    showDialog(
+      context: context,
+      builder: (builder) {
+        switch (flag) {
+          case 0:
+            return AddEditEvent(
+              newEvent: false,
+              groupRef: groupRef,
+              event: event,
+            );
+
+          case 2:
+            return ConfirmDeleteEvent(event: event, groupRef: groupRef);
+
+          default:
+            return Dialog(child: Container());
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,55 +58,52 @@ class EventCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      child: Text(
-                        this.name,
-                        softWrap: false,
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        event.eventName,
+                        // softWrap: true,
                         overflow: TextOverflow.fade,
-                        maxLines: 1,
+                        // maxLines: 1,
                         style: GoogleFonts.roboto(
-                          fontSize: 20,
+                          fontSize: 17,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: Text(
-                        this.tag,
-                        softWrap: true,
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        event.tag,
+                        // softWrap: true,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: GoogleFonts.roboto(
                           fontSize: 12,
-                          fontWeight: FontWeight.w300,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black54,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 FilterMenu(
                   options: eventMenu,
                   optionIcons: eventMenuIcons,
                   icon: Icons.more_horiz,
                   onSelect: (choice) {
-                    FocusScope.of(context).requestFocus(new FocusNode());
+                    // FocusScope.of(context).requestFocus(new FocusNode());
                     switch (choice) {
                       case 'Edit':
-                        print("edit");
+                        _eventOption(context, 0);
                         break;
                       case 'Add to Calendar':
-                      print("Add to Calendar");
+                        print("Add to Calendar");
                         break;
-                      case 'Delete':
-                        print("delete");
+                      case 'Delete event':
+                        _eventOption(context, 2);
                         break;
                       default:
                         break;
@@ -102,7 +122,7 @@ class EventCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      DateFormat.jm().format(dateTime),
+                      DateFormat.jm().format(event.date!),
                       style: GoogleFonts.roboto(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -110,7 +130,7 @@ class EventCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      DateFormat.yMMMEd().format(dateTime),
+                      DateFormat.yMMMEd().format(event.date!),
                       style: GoogleFonts.roboto(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,

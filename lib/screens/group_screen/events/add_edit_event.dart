@@ -1,23 +1,24 @@
 import 'package:date_field/date_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:override/models/event.dart';
+import 'package:override/models/user.dart';
 import 'package:override/screens/widgets/dialog_head.dart';
 import 'package:override/shared/my_textfield.dart';
+import 'package:override/utils/event_funtions.dart';
+import 'package:override/utils/show_msg.dart';
 
 class AddEditEvent extends StatefulWidget {
   final bool newEvent;
-  final String? eventName;
-  final String? eventTag;
-  final String? eventInfo;
-  final DateTime? eventDate;
+  final Event? event;
+  final String groupRef;
   AddEditEvent({
     Key? key,
     required this.newEvent,
-    this.eventName,
-    this.eventTag,
-    this.eventInfo,
-    this.eventDate,
+    this.event,
+    required this.groupRef,
   }) : super(key: key);
 
   @override
@@ -31,6 +32,39 @@ class _AddEditEventState extends State<AddEditEvent> {
 
   DateTime? date;
 
+  void _addEditEvent(BuildContext context) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+    if (date == null) {
+      showToast('Please enter event name, tag and date!');
+      return;
+    }
+    Event newEvent = Event(
+      _eventController.text,
+      _tagController.text,
+      date,
+      _infoController.text,
+      Info.email!,
+    );
+    editAddEvent(
+      context,
+      widget.groupRef,
+      newEvent,
+      widget.event,
+      widget.newEvent,
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.event != null) {
+      _eventController.text = widget.event!.eventName;
+      _tagController.text = widget.event!.tag;
+      _infoController.text = widget.event!.info;
+      date = widget.event!.date;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -38,6 +72,7 @@ class _AddEditEventState extends State<AddEditEvent> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Column(
@@ -47,7 +82,7 @@ class _AddEditEventState extends State<AddEditEvent> {
               DialogHead(
                 heading: widget.newEvent ? "New Event" : "Edit Event",
               ),
-              SizedBox(height: 20),
+              widget.event == null ? SizedBox(height: 10) : addedBy(),
               dialogbody(context),
               SizedBox(
                 height: 20,
@@ -118,6 +153,34 @@ class _AddEditEventState extends State<AddEditEvent> {
         ],
       );
 
+  Widget addedBy() => Padding(
+        padding: const EdgeInsets.only(bottom: 10, left: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Added by : ',
+              style: GoogleFonts.roboto(
+                fontWeight: FontWeight.normal,
+                color: Colors.black54,
+                fontSize: 12,
+              ),
+            ),
+            Text(
+              widget.event!.addedBy,
+              overflow: TextOverflow.fade,
+              // maxLines: 1,
+              style: GoogleFonts.roboto(
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[400],
+                fontSize: 13,
+              ),
+            ),
+          ],
+        ),
+      );
+
   Widget pickDateTime() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -183,8 +246,7 @@ class _AddEditEventState extends State<AddEditEvent> {
               ),
             ),
             onPressed: () {
-              FocusScope.of(context).requestFocus(new FocusNode());
-              // TODO: add event logic
+              _addEditEvent(context);
             },
           ),
         ],

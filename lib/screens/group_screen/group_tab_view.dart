@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:override/screens/widgets/event_card.dart';
+import 'package:override/screens/group_screen/events/events_by_date.dart';
 
 class GroupTabView extends StatelessWidget {
-  const GroupTabView({Key? key}) : super(key: key);
+  final String groupRef;
+  const GroupTabView({Key? key, required this.groupRef}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,44 +61,21 @@ class GroupTabView extends StatelessWidget {
               child: TabBarView(
                 physics: const BouncingScrollPhysics(),
                 children: [
-                  Center(
-                    child: Text("All Events"),
+                  EventsByDate(
+                    groupRef: groupRef,
                   ),
-                  Center(
-                    child: Text("Events Today"),
+                  EventsByDate(
+                    date: DateTime.now(),
+                    groupRef: groupRef,
                   ),
-                  Center(
-                    child: Text("Events Tomorrow"),
+                  EventsByDate(
+                    date: DateTime.now().add(Duration(days: 1)),
+                    groupRef: groupRef,
                   ),
                 ],
               ),
             ),
           ],
-        ),
-      );
-
-  Widget showEvents() => Expanded(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              EventCard(
-                name: "Class A, PESUClass A,PESUClass A,PESUClass A,PESUC",
-                tag: "tag",
-                dateTime: DateTime.now(),
-              ),
-              EventCard(
-                name: "Class A, PESUClass A,PESUClass A,PESUClass A,PESUC",
-                tag: "tag",
-                dateTime: DateTime.now(),
-              ),
-              EventCard(
-                name: "Class A, PESUClass A,PESUClass A,PESUClass A,PESUC",
-                tag: "tag",
-                dateTime: DateTime.now(),
-              )
-            ],
-          ),
         ),
       );
 }

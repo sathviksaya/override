@@ -1,3 +1,0 @@
-void deleteEvent() {}
-
-void addEvent() {}

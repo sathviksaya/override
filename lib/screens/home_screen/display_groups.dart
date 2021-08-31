@@ -67,6 +67,7 @@ Widget showGroups() => Expanded(
             );
           }
           return ListView.builder(
+            physics: ClampingScrollPhysics(),
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (itemBuilder, index) {
               var data = snapshot.data!.docs[index];

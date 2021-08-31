@@ -54,19 +54,19 @@ class DisplayMembers extends StatelessWidget {
           );
         }
         log(groupRef);
-        // if (snapshot.data!.docs.length == 0) {
-        //   return Expanded(
-        //     child: Center(
-        //       child: Text(
-        //         'No members...',
-        //         style: TextStyle(
-        //           color: Colors.black54,
-        //           fontSize: 14,
-        //         ),
-        //       ),
-        //     ),
-        //   );
-        // }
+        if (snapshot.data!.docs.length == 0) {
+          return Expanded(
+            child: Center(
+              child: Text(
+                'Something went wrong..',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          );
+        }
         return Expanded(
           child: ListView.builder(
             physics: ClampingScrollPhysics(),
