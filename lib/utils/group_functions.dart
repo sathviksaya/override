@@ -15,7 +15,7 @@ void createGroup(
 ) async {
   loading(context);
 
-  if (groupName.isEmpty) {
+  if (groupName.trim().isEmpty) {
     showToast('Please enter group name');
     Navigator.pop(context);
     return;
@@ -56,8 +56,9 @@ void joinGroup(
 ) async {
   loading(context);
 
-  if (groupId.isEmpty || extension.isEmpty) {
+  if (groupId.trim().isEmpty || extension.trim().isEmpty) {
     showToast('Please enter Group Id and Extension');
+    Navigator.pop(context);
     return;
   }
 
