@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:override/models/event.dart';
 import 'package:override/models/user.dart';
+import 'package:override/screens/group_screen/events/confirm_overwrite.dart';
 import 'package:override/screens/widgets/dialog_head.dart';
 import 'package:override/shared/my_textfield.dart';
 import 'package:override/utils/event_funtions.dart';
@@ -32,7 +33,7 @@ class _AddEditEventState extends State<AddEditEvent> {
 
   DateTime? date;
 
-  void _addEditEvent(BuildContext context) {
+  void _addEditEvent(BuildContext context) async {
     FocusScope.of(context).requestFocus(new FocusNode());
     if (date == null) {
       showToast('Please enter event name, tag and date!');
@@ -45,6 +46,24 @@ class _AddEditEventState extends State<AddEditEvent> {
       _infoController.text,
       Info.email!,
     );
+
+    if (widget.newEvent) {
+      Event? duplicateEvent =
+          await checkDuplicateEvent(context, widget.groupRef, newEvent);
+
+      if (duplicateEvent != null) {
+        showDialog(
+          context: context,
+          builder: (builder) => ConfirmOverwrite(
+            prevEvent: duplicateEvent,
+            groupRef: widget.groupRef,
+            event: newEvent,
+          ),
+        );
+        return;
+      }
+    }
+
     editAddEvent(
       context,
       widget.groupRef,
@@ -103,6 +122,7 @@ class _AddEditEventState extends State<AddEditEvent> {
     String hint,
     TextEditingController controller, {
     TextInputType inputType = TextInputType.text,
+    int maxLines = 1,
   }) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,6 +143,7 @@ class _AddEditEventState extends State<AddEditEvent> {
             inputType: inputType,
             controller: controller,
             hint: hint,
+            maxLines: maxLines,
           ),
         ],
       );
@@ -148,6 +169,7 @@ class _AddEditEventState extends State<AddEditEvent> {
             "Additional Info",
             "Remeber to pick up the cake...",
             _infoController,
+            maxLines: 5,
           ),
           SizedBox(height: 10),
         ],

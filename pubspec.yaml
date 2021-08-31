@@ -20,6 +20,10 @@ dependencies:
   google_sign_in: ^5.0.7
   cloud_firestore: ^2.5.1
 
+  # LINKIFY
+  flutter_linkify: ^5.0.2
+  url_launcher: ^6.0.9
+
   shared_preferences: ^2.0.7
   page_transition: ^2.0.2
   lottie: ^1.1.0
@@ -28,6 +32,9 @@ dependencies:
   intl: ^0.17.0
   fluttertoast: ^8.0.8
   date_field: ^2.0.1
+  expansion_tile_card: ^2.0.0
+  rounded_expansion_tile: ^0.0.13
+  
 
   
 

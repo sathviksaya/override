@@ -32,7 +32,7 @@ class Event {
       'addedBy': addedBy,
       'date': date,
       'tag': tag,
-      'info': info,
+      'info': info.trim(),
       'queryDate': DateFormat('dd-MM-y').format(date ?? DateTime.now()),
     };
   }

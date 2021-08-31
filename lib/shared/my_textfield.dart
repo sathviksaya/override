@@ -6,7 +6,8 @@ class MyTextField extends StatelessWidget {
   final String hint;
   final IconData? icon;
   final double radius;
-  final int lines;
+  final int maxLines;
+  final int minLines;
   final bool? obscureText;
   final Function(String? val)? onChanged;
   const MyTextField({
@@ -14,49 +15,46 @@ class MyTextField extends StatelessWidget {
     required this.controller,
     required this.hint,
     this.icon,
-    this.lines = 1,
+    this.maxLines = 1,
     this.radius = 15,
     this.obscureText,
     this.onChanged,
     this.inputType,
+    this.minLines = 1,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-      ),
-      child: TextFormField(
-        controller: controller,
-        textCapitalization: TextCapitalization.sentences,
-        keyboardType: inputType,
-        textInputAction: TextInputAction.next,
-        cursorColor: Colors.black54,
-        onChanged: onChanged,
-        maxLines: lines,
-        style: TextStyle(color: Colors.black87),
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: TextStyle(
-            color: Colors.grey,
-          ),
-          contentPadding: const EdgeInsets.all(15),
-          border: InputBorder.none,
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(radius),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(radius),
-          ),
-          fillColor: Colors.grey[200],
-          enabled: true,
-          suffixIcon: Icon(
-            icon,
-            color: Colors.black54,
-          ),
+    return TextFormField(
+      controller: controller,
+      textCapitalization: TextCapitalization.sentences,
+      keyboardType: inputType,
+      textInputAction: TextInputAction.next,
+      cursorColor: Colors.black54,
+      onChanged: onChanged,
+      maxLines: maxLines,
+      minLines: minLines,
+      style: TextStyle(color: Colors.black87),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: TextStyle(
+          color: Colors.grey,
+        ),
+        contentPadding: const EdgeInsets.all(15),
+        border: InputBorder.none,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        fillColor: Colors.grey[200],
+        enabled: true,
+        suffixIcon: Icon(
+          icon,
+          color: Colors.black54,
         ),
       ),
     );
