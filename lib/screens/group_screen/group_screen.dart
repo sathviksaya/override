@@ -125,7 +125,7 @@ class GroupScreen extends StatelessWidget {
               case 'Members':
                 showCreds(context, 0);
                 break;
-              case 'Add People':
+              case 'Group Creds':
                 showCreds(context, 1);
                 break;
               case 'Mute Events':
@@ -142,7 +142,7 @@ class GroupScreen extends StatelessWidget {
 
   List<String> groupMenu = [
     'Members',
-    'Add People',
+    'Group Creds',
     'Mute Events',
     'Leave Group'
   ];
@@ -152,12 +152,12 @@ class GroupScreen extends StatelessWidget {
       Icons.group,
       Colors.black87,
     ],
-    'Add People': [
-      Icons.person_add,
+    'Group Creds': [
+      Icons.info,
       Colors.black87,
     ],
     'Mute Events': [
-      Icons.volume_mute,
+      Icons.volume_off,
       Colors.black87,
     ],
     'Leave Group': [
