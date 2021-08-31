@@ -129,7 +129,7 @@ class GroupScreen extends StatelessWidget {
           optionIcons: groupMenuIcons,
           icon: Icons.more_vert,
           onSelect: (choice) {
-            FocusScope.of(context).requestFocus(new FocusNode());
+            // FocusScope.of(context).requestFocus(new FocusNode());
             switch (choice) {
               case 'Members':
                 showCreds(context, 0);
