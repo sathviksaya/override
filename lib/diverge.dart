@@ -15,11 +15,15 @@ class Diverge extends StatefulWidget {
 class _DivergeState extends State<Diverge> {
   void divergeScreen() async {
     bool signedIn = await checkAuth();
-    if (signedIn) {
-      replacePage(context, Home());
-    } else {
-      replacePage(context, Auth());
-    }
+    Future.delayed(Duration(seconds: 2)).then(
+      (value) {
+        if (signedIn) {
+          replacePage(context, Home());
+        } else {
+          replacePage(context, Auth());
+        }
+      },
+    );
   }
 
   @override
@@ -27,9 +31,19 @@ class _DivergeState extends State<Diverge> {
     divergeScreen();
     return Scaffold(
       body: Center(
-        child: SpinKitFadingCircle(
-          color: Colors.black54,
-          size: 20,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/icon_light.png',
+              height: 50,
+            ),
+            SizedBox(height: 20),
+            SpinKitFadingCircle(
+              color: Colors.black54,
+              size: 20,
+            ),
+          ],
         ),
       ),
     );
