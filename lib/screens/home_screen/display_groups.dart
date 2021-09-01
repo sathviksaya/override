@@ -19,12 +19,26 @@ class DisplayGroups extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: MyTextField(
-                controller: _searchController,
-                hint: "Search groups...",
-                icon: Icons.search,
-                radius: 50,
+              padding: const EdgeInsets.only(left: 15, right: 5),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: MyTextField(
+                      controller: _searchController,
+                      hint: "Search groups...",
+                      radius: 50,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      
+                    },
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(

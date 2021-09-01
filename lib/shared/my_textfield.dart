@@ -52,10 +52,6 @@ class MyTextField extends StatelessWidget {
         ),
         fillColor: Colors.grey[200],
         enabled: true,
-        suffixIcon: Icon(
-          icon,
-          color: Colors.black54,
-        ),
       ),
     );
   }
