@@ -91,27 +91,30 @@ class _AddEditEventState extends State<AddEditEvent> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      child: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DialogHead(
-                heading: widget.newEvent ? "New Event" : "Edit Event",
-              ),
-              widget.event == null ? SizedBox(height: 10) : addedBy(),
-              dialogbody(context),
-              SizedBox(
-                height: 20,
-              ),
-              submitButton(context),
-              SizedBox(
-                height: 10,
-              ),
-            ],
+      child: SizedBox(
+        width: 600,
+        child: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DialogHead(
+                  heading: widget.newEvent ? "New Event" : "Edit Event",
+                ),
+                widget.event == null ? SizedBox(height: 10) : addedBy(),
+                dialogbody(context),
+                SizedBox(
+                  height: 20,
+                ),
+                submitButton(context),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
         ),
       ),

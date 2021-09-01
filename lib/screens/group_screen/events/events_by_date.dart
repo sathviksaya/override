@@ -14,7 +14,7 @@ class EventsByDate extends StatelessWidget {
     required this.groupRef,
   }) : super(key: key);
 
-  FirebaseFirestore fbase = FirebaseFirestore.instance;
+  final FirebaseFirestore fbase = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {

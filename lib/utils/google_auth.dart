@@ -17,13 +17,7 @@ Future<void> signInWithGoogle(BuildContext context) async {
   GoogleSignInAccount? googleUser;
 
   try {
-    googleUser = await GoogleSignIn(
-      scopes: [
-        'email',
-        // 'https://www.googleapis.com/auth/calendar',
-        // 'https://www.googleapis.com/auth/calendar.events',
-      ],
-    ).signIn();
+    googleUser = await GoogleSignIn().signIn();
   } catch (e) {
     log(e.toString());
     Navigator.pop(context);

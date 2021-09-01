@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -105,7 +107,7 @@ Widget showGroups(String groupName) => Expanded(
                 description: data['description'],
                 extension: data['extension'],
                 groupId: data['groupId'],
-                eventsNumber: 1,
+                eventsNumber: Random().nextInt(4),
               );
             },
           );

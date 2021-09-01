@@ -18,23 +18,26 @@ class LeaveGroup extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DialogHead(
-              heading: 'Leave group',
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            showWarning(),
-            SizedBox(
-              height: 10,
-            ),
-            button(context),
-          ],
+      child: SizedBox(
+        width: 350,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DialogHead(
+                heading: 'Leave group',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              showWarning(),
+              SizedBox(
+                height: 10,
+              ),
+              button(context),
+            ],
+          ),
         ),
       ),
     );

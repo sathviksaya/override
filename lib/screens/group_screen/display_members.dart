@@ -18,6 +18,7 @@ class DisplayMembers extends StatelessWidget {
       ),
       child: SizedBox(
         height: 500,
+        width: 450,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 10,

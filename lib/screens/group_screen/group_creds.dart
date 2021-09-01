@@ -20,37 +20,40 @@ class GroupCreds extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 5,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DialogHead(heading: 'Group credentials'),
-            SizedBox(
-              height: 20,
-            ),
-            showInfo(
-              'Group Id',
-              groupId,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            showInfo(
-              'Extension',
-              extension,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            copyButton(
-              groupId,
-              extension,
-            ),
-          ],
+      child: SizedBox(
+        width: 350,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 5,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DialogHead(heading: 'Group credentials'),
+              SizedBox(
+                height: 20,
+              ),
+              showInfo(
+                'Group Id',
+                groupId,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              showInfo(
+                'Extension',
+                extension,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              copyButton(
+                groupId,
+                extension,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -222,7 +221,7 @@ class EventCard extends StatelessWidget {
 void _addToCalendar(Event event) async {
   var url = Uri.parse(
       'https://www.googleapis.com/calendar/v3/calendars/calendarId/events');
-  var response = await http.post(
+  await http.post(
     url,
     body: {
       'summary': event.eventName,
@@ -237,7 +236,6 @@ void _addToCalendar(Event event) async {
       "anyoneCanAddSelf": jsonEncode(true),
     },
   );
-  log(response.body);
 }
 
 List<String> eventMenu = [
