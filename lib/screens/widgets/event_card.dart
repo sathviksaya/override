@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +12,7 @@ import 'package:override/screens/group_screen/events/confirm_delete.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
 import 'package:override/utils/show_msg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class EventCard extends StatelessWidget {
   final String groupRef;
@@ -154,7 +158,7 @@ class EventCard extends StatelessWidget {
                       showToast("Event copied");
                       break;
                     case 'Add to Calendar':
-                      print("Add to Calendar");
+                      _addToCalendar(event);
                       break;
                     case 'Delete event':
                       _eventOption(context, 2);
@@ -213,6 +217,27 @@ class EventCard extends StatelessWidget {
       ),
     );
   }
+}
+
+void _addToCalendar(Event event) async {
+  var url = Uri.parse(
+      'https://www.googleapis.com/calendar/v3/calendars/calendarId/events');
+  var response = await http.post(
+    url,
+    body: {
+      'summary': event.eventName,
+      // 'location': '800 Howard St., San Francisco, CA 94103',
+      'description': event.info.isEmpty ? 'No description' : event.info,
+      'start': jsonEncode({
+        'dateTime': '2021-09-02T10:00:00+05:30',
+      }),
+      'end': jsonEncode({
+        'dateTime': '2021-09-02T14:00:00+05:30',
+      }),
+      "anyoneCanAddSelf": jsonEncode(true),
+    },
+  );
+  log(response.body);
 }
 
 List<String> eventMenu = [

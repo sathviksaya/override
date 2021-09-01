@@ -20,8 +20,8 @@ Future<void> signInWithGoogle(BuildContext context) async {
     googleUser = await GoogleSignIn(
       scopes: [
         'email',
-        'https://www.googleapis.com/auth/calendar',
-        'https://www.googleapis.com/auth/calendar.events',
+        // 'https://www.googleapis.com/auth/calendar',
+        // 'https://www.googleapis.com/auth/calendar.events',
       ],
     ).signIn();
   } catch (e) {

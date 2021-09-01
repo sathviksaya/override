@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {
   final TextInputType? inputType;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String hint;
   final IconData? icon;
   final double radius;
   final int maxLines;
+  final String? initVal;
   final int minLines;
   final bool? obscureText;
   final Function(String? val)? onChanged;
   const MyTextField({
     Key? key,
-    required this.controller,
+    this.controller,
+    this.initVal,
     required this.hint,
     this.icon,
     this.maxLines = 1,
@@ -34,6 +36,7 @@ class MyTextField extends StatelessWidget {
       onChanged: onChanged,
       maxLines: maxLines,
       minLines: minLines,
+      initialValue: initVal,
       style: TextStyle(color: Colors.black87),
       decoration: InputDecoration(
         hintText: hint,

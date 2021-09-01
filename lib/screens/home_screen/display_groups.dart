@@ -5,12 +5,19 @@ import 'package:override/models/user.dart';
 import 'package:override/screens/widgets/group_card.dart';
 import 'package:override/shared/my_textfield.dart';
 
-class DisplayGroups extends StatelessWidget {
+class DisplayGroups extends StatefulWidget {
   const DisplayGroups({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController _searchController = TextEditingController();
+  _DisplayGroupsState createState() => _DisplayGroupsState();
+}
+
+String query = '';
+
+class _DisplayGroupsState extends State<DisplayGroups> {
+  TextEditingController _searchController = TextEditingController();
+  @override
+  Widget build(BuildContext context) { 
 
     return Container(
       child: Padding(
@@ -27,23 +34,33 @@ class DisplayGroups extends StatelessWidget {
                       controller: _searchController,
                       hint: "Search groups...",
                       radius: 50,
+                      onChanged: (value) {
+                        setState(() {
+                          query = value!;
+                        });
+                      },
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                    },
-                    icon: Icon(
-                      Icons.search,
-                      color: Colors.black,
+                  if (query.isNotEmpty)
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          query = '';
+                        });
+                        _searchController.clear();
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
             SizedBox(
               height: 10,
             ),
-            showGroups(),
+            showGroups(query),
           ],
         ),
       ),
@@ -51,13 +68,20 @@ class DisplayGroups extends StatelessWidget {
   }
 }
 
-Widget showGroups() => Expanded(
+Widget showGroups(String groupName) => Expanded(
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('users')
-            .doc(Info.email)
-            .collection('inGroups')
-            .snapshots(),
+        stream: groupName.isEmpty
+            ? FirebaseFirestore.instance
+                .collection('users')
+                .doc(Info.email)
+                .collection('inGroups')
+                .snapshots()
+            : FirebaseFirestore.instance
+                .collection('users')
+                .doc(Info.email)
+                .collection('inGroups')
+                .where('groupName', isGreaterThanOrEqualTo: groupName)
+                .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
               snapshot.hasError) {
@@ -79,6 +103,7 @@ Widget showGroups() => Expanded(
               ),
             );
           }
+          print(snapshot.data!.docs.length);
           return ListView.builder(
             physics: ClampingScrollPhysics(),
             itemCount: snapshot.data!.docs.length,

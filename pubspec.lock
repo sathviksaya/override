@@ -21,11 +21,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.8.1"
-=======
     version: "2.6.1"
->>>>>>> 42609620ce55e71c81b5281439a62126e78c5ece
   boolean_selector:
     dependency: transitive
     description:
@@ -252,7 +248,7 @@ packages:
     source: hosted
     version: "0.10.0+2"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -405,13 +401,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-  rounded_expansion_tile:
-    dependency: "direct main"
-    description:
-      name: rounded_expansion_tile
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.13"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -500,11 +489,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "0.4.2"
-=======
     version: "0.3.0"
->>>>>>> 42609620ce55e71c81b5281439a62126e78c5ece
   typed_data:
     dependency: transitive
     description:
