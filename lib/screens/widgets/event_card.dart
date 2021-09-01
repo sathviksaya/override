@@ -8,7 +8,6 @@ import 'package:override/screens/group_screen/events/add_edit_event.dart';
 import 'package:override/screens/group_screen/events/confirm_delete.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
 import 'package:override/utils/show_msg.dart';
-import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventCard extends StatelessWidget {

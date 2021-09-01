@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:override/models/event.dart';
 import 'package:override/shared/loading.dart';
 import 'package:override/utils/show_msg.dart';
