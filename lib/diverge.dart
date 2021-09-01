@@ -37,7 +37,7 @@ class _DivergeState extends State<Diverge> {
           children: [
             Image.asset(
               'assets/images/icon_light.png',
-              height: 50,
+              height: 150,
             ),
             SizedBox(height: 20),
             SpinKitFadingCircle(
