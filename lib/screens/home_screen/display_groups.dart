@@ -12,13 +12,10 @@ class DisplayGroups extends StatefulWidget {
   _DisplayGroupsState createState() => _DisplayGroupsState();
 }
 
-String query = '';
-
 class _DisplayGroupsState extends State<DisplayGroups> {
   TextEditingController _searchController = TextEditingController();
   @override
-  Widget build(BuildContext context) { 
-
+  Widget build(BuildContext context) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -35,18 +32,13 @@ class _DisplayGroupsState extends State<DisplayGroups> {
                       hint: "Search groups...",
                       radius: 50,
                       onChanged: (value) {
-                        setState(() {
-                          query = value!;
-                        });
+                        setState(() {});
                       },
                     ),
                   ),
-                  if (query.isNotEmpty)
+                  if (_searchController.text.isNotEmpty)
                     IconButton(
                       onPressed: () {
-                        setState(() {
-                          query = '';
-                        });
                         _searchController.clear();
                       },
                       icon: Icon(
@@ -60,7 +52,7 @@ class _DisplayGroupsState extends State<DisplayGroups> {
             SizedBox(
               height: 10,
             ),
-            showGroups(query),
+            showGroups(_searchController.text),
           ],
         ),
       ),
@@ -80,7 +72,7 @@ Widget showGroups(String groupName) => Expanded(
                 .collection('users')
                 .doc(Info.email)
                 .collection('inGroups')
-                .where('groupName', isGreaterThanOrEqualTo: groupName)
+                .where('groupName', isEqualTo: groupName)
                 .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
@@ -103,7 +95,6 @@ Widget showGroups(String groupName) => Expanded(
               ),
             );
           }
-          print(snapshot.data!.docs.length);
           return ListView.builder(
             physics: ClampingScrollPhysics(),
             itemCount: snapshot.data!.docs.length,

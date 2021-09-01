@@ -124,6 +124,7 @@ class _AddEditEventState extends State<AddEditEvent> {
     TextEditingController controller, {
     TextInputType inputType = TextInputType.text,
     int maxLines = 1,
+    int minLines = 1,
   }) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,6 +146,7 @@ class _AddEditEventState extends State<AddEditEvent> {
             controller: controller,
             hint: hint,
             maxLines: maxLines,
+            minLines: minLines,
           ),
         ],
       );
@@ -171,6 +173,7 @@ class _AddEditEventState extends State<AddEditEvent> {
             "Remeber to pick up the cake...",
             _infoController,
             maxLines: 5,
+            minLines: 2,
           ),
           SizedBox(height: 10),
         ],
