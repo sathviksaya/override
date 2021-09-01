@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:override/models/copy_event.dart';
 import 'package:override/models/event.dart';
 import 'package:override/models/user.dart';
 import 'package:override/screens/group_screen/events/confirm_overwrite.dart';
@@ -252,6 +253,22 @@ class _AddEditEventState extends State<AddEditEvent> {
   Widget submitButton(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          if (CopiedEvent.event != null)
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _eventController.text = CopiedEvent.event!.eventName;
+                  _tagController.text = CopiedEvent.event!.tag;
+                  _infoController.text = CopiedEvent.event!.info;
+                  date = CopiedEvent.event!.date;
+                });
+              },
+              child: Text(
+                "Paste event",
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
+          Spacer(),
           TextButton(
             child: SizedBox(
               height: 30,

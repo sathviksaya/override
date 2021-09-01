@@ -31,7 +31,6 @@ class DisplayGroups extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      
                     },
                     icon: Icon(
                       Icons.search,

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:override/models/copy_event.dart';
 import 'package:override/models/event.dart';
 import 'package:override/screens/group_screen/events/add_edit_event.dart';
 import 'package:override/screens/group_screen/events/confirm_delete.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
+import 'package:override/utils/show_msg.dart';
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -148,6 +150,10 @@ class EventCard extends StatelessWidget {
                     case 'Edit':
                       _eventOption(context, 0);
                       break;
+                    case 'Copy event':
+                      CopiedEvent.event = event;
+                      showToast("Event copied");
+                      break;
                     case 'Add to Calendar':
                       print("Add to Calendar");
                       break;
@@ -212,6 +218,7 @@ class EventCard extends StatelessWidget {
 
 List<String> eventMenu = [
   'Edit',
+  'Copy event',
   'Add to Calendar',
   'Delete event',
 ];
@@ -219,6 +226,10 @@ List<String> eventMenu = [
 Map<String, List> eventMenuIcons = {
   'Edit': [
     Icons.edit,
+    Colors.black87,
+  ],
+  'Copy event': [
+    Icons.content_copy,
     Colors.black87,
   ],
   'Add to Calendar': [
