@@ -15,8 +15,9 @@ class Diverge extends StatefulWidget {
 class _DivergeState extends State<Diverge> {
   void divergeScreen() async {
     bool signedIn = await checkAuth();
-    Future.delayed(Duration(seconds: 2)).then(
-      (value) {
+    Future.delayed(
+      Duration(seconds: 2),
+      () {
         if (signedIn) {
           replacePage(context, Home());
         } else {
