@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -10,17 +11,22 @@ import 'package:override/screens/group_screen/events/add_edit_event.dart';
 import 'package:override/screens/group_screen/events/confirm_delete.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
 import 'package:override/utils/show_msg.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
+// import "package:googleapis_auth/auth_io.dart";
+// import 'package:googleapis/calendar/v3.dart' as calendar;
 
 class EventCard extends StatelessWidget {
   final String groupRef;
   final Event event;
-  const EventCard({
+  EventCard({
     Key? key,
     required this.groupRef,
     required this.event,
   }) : super(key: key);
+
+  // static const _scopes = const [calendar.CalendarApi.calendarScope];
+  // var _credentials;
 
   void _eventOption(BuildContext context, int flag) {
     showDialog(
@@ -72,6 +78,16 @@ class EventCard extends StatelessWidget {
     //       ),
     //   ],
     // );
+
+    // if (Platform.isAndroid) {
+    //   _credentials = new ClientId(
+    //       "412099770373-vlbvfi6mpphhjl5lfdi7a0thfduavfcn.apps.googleusercontent.com",
+    //       "");
+    // } else {
+    //   _credentials = new ClientId(
+    //       "412099770373-6r29ibl62po4d5pni9juppma7tconumk.apps.googleusercontent.com",
+    //       "");
+    // }
 
     // return ExpansionTile(
 
@@ -216,27 +232,67 @@ class EventCard extends StatelessWidget {
       ),
     );
   }
+
+  void _addToCalendar(Event event) async {
+    var url = Uri.parse(
+        'https://www.googleapis.com/calendar/v3/calendars/calendarId/events');
+    await http.post(
+      url,
+      body: {
+        'summary': event.eventName,
+        'description': event.info.isEmpty ? 'No description' : event.info,
+        'start': jsonEncode({
+          'dateTime': '2021-09-02T10:00:00+05:30',
+        }),
+        'end': jsonEncode({
+          'dateTime': '2021-09-02T14:00:00+05:30',
+        }),
+        // "anyoneCanAddSelf": jsonEncode(true),
+      },
+    );
+    
+    // calendar.Event event = calendar.Event();
+    // event.summary = eve.eventName;
+    // event.description = eve.info.isEmpty ? 'No description' : eve.info;
+
+    // calendar.EventDateTime start = new calendar.EventDateTime();
+    // start.dateTime = eve.date;
+    // start.timeZone = "GMT+05:30";
+    // event.start = start;
+
+    // calendar.EventDateTime end = new calendar.EventDateTime();
+    // end.timeZone = "GMT+05:30";
+    // end.dateTime = eve.date;
+    // event.end = end;
+    // try {
+    //   clientViaUserConsent(_credentials, _scopes, prompt)
+    //       .then((AuthClient client) {
+    //     var cal = calendar.CalendarApi(client);
+    //     String calendarId = "primary";
+    //     print( 
+    //       'lallala'  +client.toString());
+    //     cal.events.insert(event, calendarId).then((value) {
+    //       print("ADDEDDD_________________${value.status}");
+    //       if (value.status == "confirmed") {
+    //         print('Event added in google calendar');
+    //       } else {
+    //         print("Unable to add event in google calendar");
+    //       }
+    //     });
+    //   });
+    // } catch (e) {
+    //   print('Error creating event $e');
+    // }
+  }
 }
 
-void _addToCalendar(Event event) async {
-  var url = Uri.parse(
-      'https://www.googleapis.com/calendar/v3/calendars/calendarId/events');
-  await http.post(
-    url,
-    body: {
-      'summary': event.eventName,
-      // 'location': '800 Howard St., San Francisco, CA 94103',
-      'description': event.info.isEmpty ? 'No description' : event.info,
-      'start': jsonEncode({
-        'dateTime': '2021-09-02T10:00:00+05:30',
-      }),
-      'end': jsonEncode({
-        'dateTime': '2021-09-02T14:00:00+05:30',
-      }),
-      "anyoneCanAddSelf": jsonEncode(true),
-    },
-  );
-}
+// void prompt(String url) async {
+//   if (await canLaunch(url)) {
+//     await launch(url);
+//   } else {
+//     throw 'Could not launch $url';
+//   }
+// }
 
 List<String> eventMenu = [
   'Edit',

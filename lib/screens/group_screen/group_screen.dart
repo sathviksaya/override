@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:override/models/event.dart';
-import 'package:override/models/user.dart';
 import 'package:override/screens/group_screen/events/add_edit_event.dart';
 import 'package:override/screens/group_screen/group_tab_view.dart';
 import 'package:override/screens/group_screen/display_members.dart';
@@ -52,13 +50,13 @@ class GroupScreen extends StatelessWidget {
   }
 
   void showAddEventSheet(BuildContext context) {
-    Event event = Event(
-      'Supreet',
-      'Hello',
-      DateTime.now(),
-      'Extra...',
-      Info.email!,
-    );
+    // Event event = Event(
+    //   'Supreet',
+    //   'Hello',
+    //   DateTime.now(),
+    //   'Extra...',
+    //   Info.email!,
+    // );
     showDialog(
       context: context,
       builder: (context) => AddEditEvent(
