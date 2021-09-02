@@ -17,5 +17,13 @@ This app aims to sync events and timings among group of people. The app can be m
 ## Future scope
 The next version of Shareminder is aimed to have features like adding & deleting the events to & from Google Calendar, having multiple admins in a group, filtering the events and groups, notifications for events if chosen by the user to do so etc.
 
+## How to run
+### On mobile
+- Download the [Shareminder APK](https://drive.google.com/file/d/1-b_25O89c0PvYLXiAWSIagoHr7IAicwF/view?usp=sharing)
+- Install on any android device and open. (iOS users can use the website on the browser)
+
+### On web
+- Go to [Shareminder Website](https://sathviksaya.github.io/shareminder-hosted/) either on PC or on mobile browser to use it.
+
 
 ### [Developed for Override'21](https://devpost.com/software/shareminder)
