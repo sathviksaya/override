@@ -9,8 +9,8 @@
 - [Shareminder APK](https://drive.google.com/file/d/1-b_25O89c0PvYLXiAWSIagoHr7IAicwF/view?usp=sharing)
 - [Shareminder Website](https://sathviksaya.github.io/shareminder-hosted/)
 
-
-
 ## Idea
 We had an idea that if one user can add an event or series of events and share those with all the user(s), who sign's up for that topic, can easily manage all their work and not miss any grouped events. If at least one user remembers and adds up an event, can notify all other users. So, we developed the app as an Pub/Sub Architecture model.
 
+## Future scope
+The next version of Shareminder shall have features like adding & deleting the events to & from Google Calendar respectively, having multiple admins in a group, filtering the events and groups.
