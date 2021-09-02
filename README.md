@@ -1,2 +1,5 @@
 # Shareminder
-Override'21
+## Team
+- [Supreet Ronad](https://github.com/SupreetRonad)
+- [Sathvik Saya](https://github.com/sathviksaya)
+
