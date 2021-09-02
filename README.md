@@ -14,3 +14,6 @@ We had an idea that if one user can add an event or series of events and share t
 
 ## Future scope
 The next version of Shareminder shall have features like adding & deleting the events to & from Google Calendar respectively, having multiple admins in a group, filtering the events and groups.
+
+
+Developed for Override 2021
