@@ -18,4 +18,4 @@ This app aims to sync events and timings among group of people. The app can be m
 The next version of Shareminder is aimed to have features like adding & deleting the events to & from Google Calendar, having multiple admins in a group, filtering the events and groups, notifications for events if chosen by the user to do so etc.
 
 
-[Developed for Override 2021](https://devpost.com/software/shareminder)
+### [Developed for Override'21](https://devpost.com/software/shareminder)
