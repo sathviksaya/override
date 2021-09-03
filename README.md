@@ -26,4 +26,4 @@ The next version of Shareminder is aimed to have features like adding & deleting
 - Go to [Shareminder Website](https://sathviksaya.github.io/shareminder-hosted/) either on PC or on mobile browser to use it.
 
 
-### [Developed for Override'21](https://devpost.com/software/shareminder)
+#### [Developed for Override'21](https://devpost.com/software/shareminder)
