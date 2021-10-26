@@ -115,14 +115,14 @@ Future<void> addUserToGroup(
     Navigator.pop(context);
     Navigator.pop(context);
 
-    pushPage(
-      context,
-      GroupScreen(
-        groupId: groupId,
-        groupName: groupName,
-        extension: extension,
-      ),
-    );
+    // pushPage(
+    //   context,
+    //   GroupScreen(
+    //     groupId: groupId,
+    //     groupName: groupName,
+    //     extension: extension, group: null,
+    //   ),
+    // );
     showToast('You are already in the group!');
 
     return;
@@ -159,14 +159,14 @@ Future<void> addUserToGroup(
   Navigator.pop(context);
   Navigator.pop(context);
 
-  pushPage(
-    context,
-    GroupScreen(
-      groupId: groupId,
-      groupName: groupName,
-      extension: extension,
-    ),
-  );
+  // pushPage(
+  //   context,
+  //   GroupScreen(
+  //     groupId: groupId,
+  //     groupName: groupName,
+  //     extension: extension,
+  //   ),
+  // );
 
   showSnack(
     context,

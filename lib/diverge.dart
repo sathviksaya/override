@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:override/screens/auth_&_settings/tab_bar.dart';
 import 'package:override/utils/page_surf.dart';
 import 'package:override/utils/shared_prefs.dart';
 import 'package:override/web/groups_section.dart';
@@ -30,7 +31,7 @@ class _DivergeState extends State<Diverge> {
           }
           replacePage(context, Home());
         } else {
-          replacePage(context, Auth());
+          replacePage(context, TabBarScreen());
         }
       },
     );
