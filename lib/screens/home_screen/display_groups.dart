@@ -1,8 +1,9 @@
 import 'dart:math';
-
+import 'dart:developer' as dev;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:override/models/group.dart';
 import 'package:override/models/user.dart';
 import 'package:override/screens/widgets/group_card.dart';
 import 'package:override/shared/my_textfield.dart';
@@ -101,13 +102,21 @@ Widget showGroups(String groupName) => Expanded(
             physics: ClampingScrollPhysics(),
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (itemBuilder, index) {
-              var data = snapshot.data!.docs[index];
+              QueryDocumentSnapshot data = snapshot.data!.docs[index];
+              dev.log(data.toString());
+              Group group = Group(
+                data['groupName'],
+                data['groupId'],
+                data['extension'],
+                data['description'],
+              );
               return GroupCard(
                 groupName: data['groupName'],
                 description: data['description'],
                 extension: data['extension'],
                 groupId: data['groupId'],
                 eventsNumber: Random().nextInt(4),
+                group: group,
               );
             },
           );

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:override/models/group.dart';
 import 'package:override/screens/group_screen/group_screen.dart';
 import 'package:override/utils/page_surf.dart';
 
 class GroupCard extends StatelessWidget {
+  final Group group;
   final String groupName;
   final String groupId;
   final String description;
@@ -16,6 +18,7 @@ class GroupCard extends StatelessWidget {
     required this.eventsNumber,
     required this.extension,
     required this.groupId,
+    required this.group,
   }) : super(key: key);
 
   @override
@@ -37,6 +40,7 @@ class GroupCard extends StatelessWidget {
             groupId: groupId,
             groupName: groupName,
             extension: extension,
+            group: group,
           ),
         );
       },

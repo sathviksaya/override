@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:override/models/group.dart';
 import 'package:override/models/user.dart';
 import 'package:override/screens/group_screen/group_screen.dart';
 import 'package:override/shared/loading.dart';
@@ -95,6 +96,8 @@ Future<void> addUserToGroup(
   String groupId = groupRef.split('###')[0];
   String extension = groupRef.split('###')[1];
 
+  // Group group =
+
   // Check if user already in group
   await fbase
       .collection('groups')
@@ -111,6 +114,7 @@ Future<void> addUserToGroup(
   if (isInGroup) {
     Navigator.pop(context);
     Navigator.pop(context);
+
     pushPage(
       context,
       GroupScreen(

@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:override/utils/page_surf.dart';
 import 'package:override/utils/shared_prefs.dart';
+import 'package:override/web/groups_section.dart';
+import 'package:override/web/web_home.dart';
 import 'screens/auth_&_settings/auth.dart';
 import 'screens/home_screen/home.dart';
 
@@ -19,6 +23,11 @@ class _DivergeState extends State<Diverge> {
       Duration(seconds: 2),
       () {
         if (signedIn) {
+          double width = MediaQuery.of(context).size.width;
+          if (width > 600) {
+            replacePage(context, WebHome());
+            return;
+          }
           replacePage(context, Home());
         } else {
           replacePage(context, Auth());

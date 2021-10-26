@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:override/models/group.dart';
 import 'package:override/screens/group_screen/events/add_edit_event.dart';
 import 'package:override/screens/group_screen/group_tab_view.dart';
 import 'package:override/screens/group_screen/display_members.dart';
@@ -9,6 +10,7 @@ import 'package:override/screens/widgets/dropdown_list.dart';
 
 // ignore: must_be_immutable
 class GroupScreen extends StatelessWidget {
+  final Group group;
   final String groupId;
   final String groupName;
   final String extension;
@@ -17,6 +19,7 @@ class GroupScreen extends StatelessWidget {
     required this.groupId,
     required this.groupName,
     required this.extension,
+    required this.group,
   }) : super(key: key);
 
   void showCreds(BuildContext context, int flag) {
