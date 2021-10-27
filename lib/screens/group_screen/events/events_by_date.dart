@@ -42,7 +42,7 @@ class EventsByDate extends StatelessWidget {
           return Center(
             child: SpinKitFadingCircle(
               size: 20,
-              color: Colors.black54,
+              color: Colors.white54,
             ),
           );
         }
@@ -51,7 +51,7 @@ class EventsByDate extends StatelessWidget {
             child: Text(
               'No events..',
               style: TextStyle(
-                color: Colors.black54,
+                color: Colors.white54,
                 fontSize: 14,
               ),
             ),

@@ -15,6 +15,7 @@ class LeaveGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.grey[850],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -66,7 +67,7 @@ class LeaveGroup extends StatelessWidget {
             'Are you sure you want to leave the group',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.black54,
+              color: Colors.white54,
             ),
           ),
           SizedBox(

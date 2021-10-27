@@ -25,6 +25,7 @@ class GroupTabView extends StatelessWidget {
               data: ThemeData(
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
               ),
               child: TabBar(
                 labelColor: Colors.white,

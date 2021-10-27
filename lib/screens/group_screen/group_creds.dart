@@ -17,6 +17,7 @@ class GroupCreds extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.grey[850],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -73,7 +74,7 @@ class GroupCreds extends StatelessWidget {
             },
             icon: Icon(
               Icons.copy,
-              color: Colors.black54,
+              color: Colors.white54,
             ),
           ),
         ],
@@ -86,7 +87,7 @@ class GroupCreds extends StatelessWidget {
           label,
           style: GoogleFonts.roboto(
             fontSize: 13,
-            color: Colors.black54,
+            color: Colors.white54,
             fontWeight: FontWeight.w500,
           ),
         ),

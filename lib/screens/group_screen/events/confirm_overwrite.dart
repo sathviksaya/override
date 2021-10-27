@@ -21,6 +21,7 @@ class ConfirmOverwrite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.grey[850],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -83,7 +84,7 @@ class ConfirmOverwrite extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
-              color: Colors.black54,
+              color: Colors.white,
             ),
           ),
           SizedBox(
@@ -94,7 +95,7 @@ class ConfirmOverwrite extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 17,
-              // color: Colors.red[300],
+              color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
           )

@@ -11,6 +11,7 @@ import 'package:override/screens/home_screen/home.dart';
 import 'package:override/shared/loading.dart';
 import 'package:override/utils/page_surf.dart';
 import 'package:override/utils/shared_prefs.dart';
+import 'package:override/web/web_home.dart';
 import 'package:page_transition/page_transition.dart';
 
 Future<void> signInWithGoogle(BuildContext context) async {
@@ -71,7 +72,7 @@ Future<void> signInWithGoogle(BuildContext context) async {
 
     Navigator.pop(context);
 
-    replacePage(context, Home());
+    replacePage(context, WebHome());
     return;
   }
 

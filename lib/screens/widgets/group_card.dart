@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/models/group.dart';
+import 'package:override/providers/group_provider.dart';
 import 'package:override/screens/group_screen/group_screen.dart';
 import 'package:override/utils/page_surf.dart';
+import 'package:provider/provider.dart';
 
 class GroupCard extends StatelessWidget {
   final Group group;
@@ -32,84 +36,78 @@ class GroupCard extends StatelessWidget {
       eventsToday = "${this.eventsNumber} Events for today..";
     }
 
-    return GestureDetector(
-      onTap: () {
-        pushPage(
-          context,
-          GroupScreen(
-            groupId: groupId,
-            groupName: groupName,
-            extension: extension,
-            group: group,
+    return Consumer<GroupProvider>(
+      builder: (context, grp, _) {
+        return ElevatedButton(
+          onPressed: () {
+            grp.setGroup(groupId, groupName, extension, group);
+            log(group.groupId);
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Colors.grey[850],
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      this.groupName,
+                      maxLines: 1,
+                      softWrap: false,
+                      style: GoogleFonts.roboto(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: 380 * 0.6,
+                      child: Text(
+                        "${this.description}\n",
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: GoogleFonts.roboto(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
-      child: Card(
-        elevation: 20,
-        shadowColor: Colors.white38,
-        margin: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 5,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    this.groupName,
-                    maxLines: 1,
-                    softWrap: false,
-                    style: GoogleFonts.roboto(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: Text(
-                      "${this.description}\n",
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: GoogleFonts.roboto(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    eventsToday,
-                    style: GoogleFonts.roboto(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color:
-                          this.eventsNumber == 0 ? Colors.grey : Colors.amber,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
+
+// Row(
+//   mainAxisAlignment: MainAxisAlignment.end,
+//   children: [
+//     Text(
+//       eventsToday,
+//       style: GoogleFonts.roboto(
+//         fontSize: 12,
+//         fontWeight: FontWeight.w600,
+//         color:
+//             this.eventsNumber == 0 ? Colors.grey : Colors.amber,
+//       ),
+//     ),
+//   ],
+// ),

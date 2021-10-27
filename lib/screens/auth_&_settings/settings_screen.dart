@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/models/user.dart';
+import 'package:override/screens/auth_&_settings/support.dart';
 import 'package:override/utils/google_auth.dart';
+import 'package:override/utils/page_surf.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -18,7 +21,7 @@ class Settings extends StatelessWidget {
             backButton(context),
             displayInfo(context),
             logoutButton(context),
-            creaters(),
+            creaters(context),
           ],
         ),
       ),
@@ -40,6 +43,7 @@ class Settings extends StatelessWidget {
               style: GoogleFonts.roboto(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
+                color: Colors.white,
               ),
             ),
           ),
@@ -48,7 +52,7 @@ class Settings extends StatelessWidget {
             style: GoogleFonts.roboto(
               fontWeight: FontWeight.normal,
               fontSize: 15,
-              color: Colors.black54,
+              color: Colors.white60,
             ),
           ),
         ],
@@ -60,6 +64,10 @@ class Settings extends StatelessWidget {
       color: Colors.white,
       child: Image.network(
         Info.imgUrl ?? 'https://dunnvision.com/files/2019/05/Profile-512.png',
+        errorBuilder: (context, _, st) {
+          return Image.network(
+              'https://dunnvision.com/files/2019/05/Profile-512.png');
+        },
         height: MediaQuery.of(context).size.shortestSide * 0.3,
         fit: BoxFit.cover,
       ),
@@ -87,7 +95,7 @@ class Settings extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: IconButton(
-              color: Colors.black87,
+              color: Colors.white,
               icon: Icon(Icons.arrow_back_ios),
               onPressed: () {
                 Navigator.pop(context);
@@ -97,14 +105,30 @@ class Settings extends StatelessWidget {
         ],
       );
 
-  Widget creaters() => Padding(
+  Widget creaters(BuildContext context) => Padding(
         padding: const EdgeInsets.all(10),
-        child: Text(
-          'Created by Supreet & Sathvik',
-          style: GoogleFonts.roboto(
-            fontWeight: FontWeight.normal,
-            fontSize: 12,
-            color: Colors.black38,
+        child: TextButton(
+          onPressed: () {
+            pushPage(
+              context,
+              Scaffold(
+                appBar: AppBar(
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  iconTheme: IconThemeData(color: Colors.white),
+                ),
+                backgroundColor: Colors.grey[900],
+                body: SupportScreen(),
+              ),
+            );
+          },
+          child: Text(
+            'About developers',
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.normal,
+              fontSize: 12,
+              color: Colors.white38,
+            ),
           ),
         ),
       );

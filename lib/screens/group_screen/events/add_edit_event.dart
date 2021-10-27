@@ -88,6 +88,7 @@ class _AddEditEventState extends State<AddEditEvent> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.grey[850],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -137,7 +138,7 @@ class _AddEditEventState extends State<AddEditEvent> {
             child: Text(
               label,
               style: GoogleFonts.roboto(
-                color: Colors.black54,
+                color: Colors.white54,
                 fontWeight: FontWeight.normal,
                 fontSize: 12,
               ),
@@ -145,6 +146,7 @@ class _AddEditEventState extends State<AddEditEvent> {
           ),
           SizedBox(height: 5),
           MyTextField(
+            fillColor: Colors.grey[800],
             inputType: inputType,
             controller: controller,
             hint: hint,
@@ -192,7 +194,7 @@ class _AddEditEventState extends State<AddEditEvent> {
               'Added by : ',
               style: GoogleFonts.roboto(
                 fontWeight: FontWeight.normal,
-                color: Colors.black54,
+                color: Colors.white54,
                 fontSize: 12,
               ),
             ),
@@ -218,7 +220,7 @@ class _AddEditEventState extends State<AddEditEvent> {
             child: Text(
               "Date & Time",
               style: GoogleFonts.roboto(
-                color: Colors.black54,
+                color: Colors.white54,
                 fontWeight: FontWeight.normal,
                 fontSize: 12,
               ),
@@ -228,20 +230,23 @@ class _AddEditEventState extends State<AddEditEvent> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Colors.grey[200],
+              color: Colors.grey[800],
             ),
             padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
             child: Center(
               child: DateTimeField(
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.date_range_rounded),
+                  prefixIcon: Icon(
+                    Icons.date_range_rounded,
+                    color: Colors.white54,
+                  ),
                   border: InputBorder.none,
                   fillColor: Colors.transparent,
                   hintText: 'Date and time',
-                  // hintStyle: TextStyle(
-                  //   color: Colors.black45,
-                  //   fontSize: 13,
-                  // ),
+                  hintStyle: TextStyle(
+                    color: Colors.white54,
+                    fontSize: 13,
+                  ),
                 ),
                 dateFormat: DateFormat("EE, dd MMM, h : mm a"),
                 onDateSelected: (DateTime selectedDate) {

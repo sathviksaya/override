@@ -24,12 +24,7 @@ class _DivergeState extends State<Diverge> {
       Duration(seconds: 2),
       () {
         if (signedIn) {
-          double width = MediaQuery.of(context).size.width;
-          if (width > 600) {
-            replacePage(context, WebHome());
-            return;
-          }
-          replacePage(context, Home());
+          replacePage(context, WebHome());
         } else {
           replacePage(context, TabBarScreen());
         }

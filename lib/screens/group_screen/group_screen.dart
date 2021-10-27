@@ -1,70 +1,69 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/models/group.dart';
+import 'package:override/providers/group_provider.dart';
 import 'package:override/screens/group_screen/events/add_edit_event.dart';
 import 'package:override/screens/group_screen/group_tab_view.dart';
 import 'package:override/screens/group_screen/display_members.dart';
 import 'package:override/screens/group_screen/group_creds.dart';
 import 'package:override/screens/group_screen/leave_group.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class GroupScreen extends StatelessWidget {
-  final Group group;
-  final String groupId;
-  final String groupName;
-  final String extension;
+  // final Group group;
+  // final String groupId;
+  // final String groupName;
+  // final String extension;
   GroupScreen({
     Key? key,
-    required this.groupId,
-    required this.groupName,
-    required this.extension,
-    required this.group,
+    // required this.groupId,
+    // required this.groupName,
+    // required this.extension,
+    // required this.group,
   }) : super(key: key);
 
-  void showCreds(BuildContext context, int flag) {
+  void showCreds(BuildContext context, int flag, Group grp) {
     showDialog(
       context: context,
       builder: (builder) {
         switch (flag) {
           case 0:
-            return DisplayMembers(groupRef: groupId + '###' + extension);
+            return DisplayMembers(
+              groupRef: grp.groupId + '###' + grp.extension,
+            );
 
           case 1:
             return GroupCreds(
-              groupId: groupId,
-              extension: extension,
+              groupId: grp.groupId,
+              extension: grp.extension,
             );
 
           case 3:
             return LeaveGroup(
-              groupName: groupName,
-              groupRef: groupId + '###' + extension,
+              groupName: grp.groupName,
+              groupRef: grp.groupId + '###' + grp.extension,
             );
 
           default:
             return GroupCreds(
-              groupId: groupId,
-              extension: extension,
+              groupId: grp.groupId,
+              extension: grp.extension,
             );
         }
       },
     );
   }
 
-  void showAddEventSheet(BuildContext context) {
-    // Event event = Event(
-    //   'Supreet',
-    //   'Hello',
-    //   DateTime.now(),
-    //   'Extra...',
-    //   Info.email!,
-    // );
+  void showAddEventSheet(BuildContext context, Group grp) {
     showDialog(
       context: context,
       builder: (context) => AddEditEvent(
         newEvent: true,
-        groupRef: groupId + '###' + extension,
+        groupRef: grp.groupId + '###' + grp.extension,
         // event: event,
       ),
     );
@@ -72,59 +71,71 @@ class GroupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            backButton(context),
-            Spacer(),
-            Text(
-              groupName,
-              style: GoogleFonts.roboto(
-                color: Colors.black87,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        actions: groupOptions(context),
-      ),
-      body: GroupTabView(
-        groupRef: groupId + '###' + extension,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showAddEventSheet(context);
-        },
-        backgroundColor: Colors.black,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
+    return Consumer<GroupProvider>(
+      builder: (context, grp, _) {
+        log('group screen changed');
+        return grp.group == null
+            ? _noGroupSelected()
+            : Scaffold(
+                backgroundColor: Colors.grey[900],
+                appBar: AppBar(
+                  elevation: 0,
+                  backgroundColor: Colors.grey[850],
+                  automaticallyImplyLeading: false,
+                  title: Row(
+                    children: [
+                      backButton(context),
+                      Spacer(),
+                      Text(
+                        grp.groupName,
+                        style: GoogleFonts.roboto(
+                          color: Colors.white70,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  actions: groupOptions(context, grp.group!),
+                ),
+                body: GroupTabView(
+                  groupRef: grp.groupId + '###' + grp.extension,
+                ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {
+                    showAddEventSheet(context, grp.group!);
+                  },
+                  backgroundColor: Colors.black,
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ),
+              );
+      },
     );
   }
 
-  Widget backButton(BuildContext context) => Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
-            child: IconButton(
-              color: Colors.black87,
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-        ],
+  Widget backButton(BuildContext context) => Consumer<GroupProvider>(
+        builder: (context, grp, _) {
+          return Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+                child: IconButton(
+                  color: Colors.white70,
+                  icon: Icon(Icons.close_rounded),
+                  onPressed: () {
+                    grp.reset();
+                  },
+                ),
+              ),
+            ],
+          );
+        },
       );
 
-  List<Widget> groupOptions(BuildContext context) => [
+  List<Widget> groupOptions(BuildContext context, Group grp) => [
         FilterMenu(
           options: groupMenu,
           optionIcons: groupMenuIcons,
@@ -133,15 +144,15 @@ class GroupScreen extends StatelessWidget {
             // FocusScope.of(context).requestFocus(new FocusNode());
             switch (choice) {
               case 'Members':
-                showCreds(context, 0);
+                showCreds(context, 0, grp);
                 break;
               case 'Group Creds':
-                showCreds(context, 1);
+                showCreds(context, 1, grp);
                 break;
               case 'Mute Events':
                 break;
               case 'Leave Group':
-                showCreds(context, 3);
+                showCreds(context, 3, grp);
                 break;
               default:
                 break;
@@ -149,6 +160,18 @@ class GroupScreen extends StatelessWidget {
           },
         ),
       ];
+
+  Widget _noGroupSelected() => Scaffold(
+        backgroundColor: Colors.grey[900],
+        body: Center(
+          child: Text(
+            'No group selected!',
+            style: GoogleFonts.montserrat(
+              color: Colors.white54,
+            ),
+          ),
+        ),
+      );
 
   List<String> groupMenu = [
     'Members',
@@ -160,15 +183,15 @@ class GroupScreen extends StatelessWidget {
   Map<String, List> groupMenuIcons = {
     'Members': [
       Icons.group,
-      Colors.black87,
+      Colors.white,
     ],
     'Group Creds': [
       Icons.info,
-      Colors.black87,
+      Colors.white,
     ],
     'Mute Events': [
       Icons.volume_off,
-      Colors.black87,
+      Colors.white,
     ],
     'Leave Group': [
       Icons.exit_to_app,

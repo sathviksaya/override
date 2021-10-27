@@ -35,7 +35,7 @@ class TabBarScreen extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(top: 15, bottom: 40),
-            width: 160,
+            width: 180,
             child: Theme(
               data: ThemeData(
                 highlightColor: Colors.transparent,
@@ -63,7 +63,7 @@ class TabBarScreen extends StatelessWidget {
                     'Home',
                   ),
                   Text(
-                    'Support',
+                    'Developers',
                   ),
                 ],
               ),

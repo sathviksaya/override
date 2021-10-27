@@ -17,6 +17,7 @@ class ConfirmDeleteEvent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.grey[850],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -71,7 +72,7 @@ class ConfirmDeleteEvent extends StatelessWidget {
             'Are you sure you want to delete the event',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.black54,
+              color: Colors.white54,
             ),
           ),
           SizedBox(
@@ -82,7 +83,7 @@ class ConfirmDeleteEvent extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 17,
-              // color: Colors.red[300],
+              color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
           )

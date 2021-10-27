@@ -8,8 +8,7 @@ import 'package:override/utils/page_surf.dart';
 
 // ignore: must_be_immutable
 class GroupSection extends StatelessWidget {
-  final Function() setGroup;
-  GroupSection({Key? key, required this.setGroup}) : super(key: key);
+  GroupSection({Key? key}) : super(key: key);
 
   void showNewGroupDialog(BuildContext context) {
     showDialog(
@@ -33,13 +32,14 @@ class GroupSection extends StatelessWidget {
       ),
       width: 380,
       child: Scaffold(
+        backgroundColor: Colors.grey[850],
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
           title: Text(
             'Shareminder',
             style: GoogleFonts.roboto(
-              color: Colors.black87,
+              color: Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -77,11 +77,11 @@ class GroupSection extends StatelessWidget {
   Map<String, List> homeMenuIcons = {
     'New group': [
       Icons.add,
-      Colors.black87,
+      Colors.white,
     ],
     'Settings': [
       Icons.settings,
-      Colors.black87,
+      Colors.white,
     ],
   };
 }

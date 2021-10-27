@@ -9,6 +9,7 @@ void loading(BuildContext context) {
       return WillPopScope(
         onWillPop: () => Future(() => false),
         child: Dialog(
+          backgroundColor: Colors.grey[800],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -16,7 +17,7 @@ void loading(BuildContext context) {
             height: 70,
             width: 100,
             child: SpinKitFadingCircle(
-              color: Colors.black54,
+              color: Colors.white60,
               size: 20,
             ),
           ),

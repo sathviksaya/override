@@ -4,8 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 class DialogHead extends StatelessWidget {
   final String heading;
   final Color? headingColor;
-  const DialogHead({Key? key, required this.heading, this.headingColor})
-      : super(key: key);
+  const DialogHead({
+    Key? key,
+    required this.heading,
+    this.headingColor = Colors.white,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +31,7 @@ class DialogHead extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           icon: Icon(
             Icons.close,
+            color: Colors.white,
           ),
         ),
       ],

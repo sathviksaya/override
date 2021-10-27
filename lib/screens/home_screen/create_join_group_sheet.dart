@@ -14,6 +14,7 @@ class GroupDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.grey[850],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -80,7 +81,7 @@ class GroupDialog extends StatelessWidget {
             child: Text(
               label,
               style: GoogleFonts.roboto(
-                color: Colors.black54,
+                color: Colors.white,
                 fontWeight: FontWeight.normal,
                 fontSize: 12,
               ),
@@ -91,6 +92,7 @@ class GroupDialog extends StatelessWidget {
             inputType: inputType,
             controller: controller,
             hint: hint,
+            fillColor: Colors.grey[800],
           ),
         ],
       );

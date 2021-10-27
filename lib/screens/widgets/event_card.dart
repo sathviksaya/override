@@ -105,7 +105,8 @@ class EventCard extends StatelessWidget {
 
     return Card(
       elevation: 20,
-      shadowColor: Colors.white38,
+      color: Colors.grey[850],
+      // shadowColor: Colors.white38,
       margin: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 5,
@@ -139,6 +140,7 @@ class EventCard extends StatelessWidget {
                       style: GoogleFonts.roboto(
                         fontSize: 17,
                         fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
                     ),
                     SizedBox(
@@ -152,7 +154,7 @@ class EventCard extends StatelessWidget {
                       style: GoogleFonts.roboto(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black54,
+                        color: Colors.white54,
                       ),
                     ),
                   ],
@@ -218,13 +220,18 @@ class EventCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Divider(),
+                Divider(
+                  color: Colors.white30,
+                ),
                 Linkify(
                   onOpen: (link) async {
                     await launch(link.url);
                   },
                   text: event.info,
-                  style: TextStyle(fontSize: 13),
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.white70,
+                  ),
                 ),
               ],
             ),
@@ -250,7 +257,7 @@ class EventCard extends StatelessWidget {
         // "anyoneCanAddSelf": jsonEncode(true),
       },
     );
-    
+
     // calendar.Event event = calendar.Event();
     // event.summary = eve.eventName;
     // event.description = eve.info.isEmpty ? 'No description' : eve.info;
@@ -269,7 +276,7 @@ class EventCard extends StatelessWidget {
     //       .then((AuthClient client) {
     //     var cal = calendar.CalendarApi(client);
     //     String calendarId = "primary";
-    //     print( 
+    //     print(
     //       'lallala'  +client.toString());
     //     cal.events.insert(event, calendarId).then((value) {
     //       print("ADDEDDD_________________${value.status}");
@@ -304,15 +311,15 @@ List<String> eventMenu = [
 Map<String, List> eventMenuIcons = {
   'Edit': [
     Icons.edit,
-    Colors.black87,
+    Colors.white,
   ],
   'Copy event': [
     Icons.content_copy,
-    Colors.black87,
+    Colors.white,
   ],
   'Add to Calendar': [
     Icons.calendar_today,
-    Colors.black87,
+    Colors.white,
   ],
   'Delete event': [
     Icons.delete,

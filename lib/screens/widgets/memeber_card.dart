@@ -36,6 +36,10 @@ class MemberCard extends StatelessWidget {
       color: Colors.white,
       child: Image.network(
         imgUrl,
+        errorBuilder: (context, _, st) {
+          return Image.network(
+              'https://dunnvision.com/files/2019/05/Profile-512.png');
+        },
         height: 50,
         fit: BoxFit.cover,
       ),
@@ -72,6 +76,7 @@ class MemberCard extends StatelessWidget {
                     style: GoogleFonts.roboto(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -91,7 +96,7 @@ class MemberCard extends StatelessWidget {
                 style: GoogleFonts.roboto(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: Colors.black54,
+                  color: Colors.white54,
                 ),
               ),
             ),

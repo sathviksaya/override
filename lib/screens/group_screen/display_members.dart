@@ -13,6 +13,7 @@ class DisplayMembers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.grey[850],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -49,7 +50,7 @@ class DisplayMembers extends StatelessWidget {
             child: Center(
               child: SpinKitFadingCircle(
                 size: 20,
-                color: Colors.black54,
+                color: Colors.white54,
               ),
             ),
           );
@@ -61,7 +62,7 @@ class DisplayMembers extends StatelessWidget {
               child: Text(
                 'Something went wrong..',
                 style: TextStyle(
-                  color: Colors.black54,
+                  color: Colors.white54,
                   fontSize: 14,
                 ),
               ),

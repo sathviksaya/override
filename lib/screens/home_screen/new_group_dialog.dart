@@ -20,6 +20,7 @@ class NewGroupDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.grey[850],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -97,7 +98,7 @@ Widget optionButton(
           children: [
             Icon(
               icon,
-              color: Colors.black,
+              color: Colors.white,
               size: 50,
             ),
             SizedBox(
@@ -107,7 +108,7 @@ Widget optionButton(
               name,
               style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
           ],
