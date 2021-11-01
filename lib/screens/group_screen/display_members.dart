@@ -12,25 +12,25 @@ class DisplayMembers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      backgroundColor: Colors.grey[850],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: SizedBox(
-        height: 500,
-        width: 450,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 5,
-          ),
-          child: Column(
-            children: [
-              DialogHead(heading: 'Members'),
-              membersList(context, groupRef),
-            ],
-          ),
+    return SizedBox(
+      // height: 500,
+      // width: 450,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 5,
+        ),
+        child: Column(
+          children: [
+            DialogHead(
+              heading: 'Members',
+              closeButtonEnabled: false,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            membersList(context, groupRef),
+          ],
         ),
       ),
     );

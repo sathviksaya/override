@@ -22,26 +22,24 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      // onTap: () {
-      //   FocusScope.of(context).requestFocus(new FocusNode());
-      // },
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: Text(
-            'Shareminder',
-            style: GoogleFonts.roboto(
-              color: Colors.black87,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+    return Scaffold(
+      drawer: Settings(),
+      drawerEnableOpenDragGesture: false,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Shareminder',
+          style: GoogleFonts.roboto(
+            color: Colors.black87,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
           ),
-          actions: homeOption(context),
         ),
-        body: DisplayGroups(),
+        actions: homeOption(context),
       ),
+      body: DisplayGroups(),
     );
   }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:override/screens/auth_&_settings/settings_screen.dart';
@@ -5,10 +7,13 @@ import 'package:override/screens/home_screen/display_groups.dart';
 import 'package:override/screens/home_screen/new_group_dialog.dart';
 import 'package:override/screens/widgets/dropdown_list.dart';
 import 'package:override/utils/page_surf.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class GroupSection extends StatelessWidget {
   GroupSection({Key? key}) : super(key: key);
+
+  final _groupScaffoldKey = GlobalKey<ScaffoldState>();
 
   void showNewGroupDialog(BuildContext context) {
     showDialog(
@@ -21,33 +26,40 @@ class GroupSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          right: BorderSide(
-            color: Colors.black45,
-            width: 0.5,
-          ),
-        ),
-      ),
-      width: 380,
-      child: Scaffold(
-        backgroundColor: Colors.grey[850],
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: Text(
-            'Shareminder',
-            style: GoogleFonts.roboto(
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+    return Consumer(
+      builder: (context, grp, _) {
+        return Container(
+          decoration: BoxDecoration(
+            border: Border(
+              right: BorderSide(
+                color: Colors.black45,
+                width: 0.5,
+              ),
             ),
           ),
-          actions: homeOption(context),
-        ),
-        body: DisplayGroups(),
-      ),
+          width: 380,
+          child: Scaffold(
+            key: _groupScaffoldKey,
+            drawer: Settings(),
+            backgroundColor: Colors.grey[850],
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              title: Text(
+                'Shareminder',
+                style: GoogleFonts.roboto(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              actions: homeOption(context),
+            ),
+            body: DisplayGroups(),
+          ),
+        );
+      },
     );
   }
 
@@ -60,7 +72,9 @@ class GroupSection extends StatelessWidget {
             // FocusScope.of(context).requestFocus(new FocusNode());
             switch (choice) {
               case 'Settings':
-                pushPage(context, Settings());
+                // pushPage(context, Settings());
+
+                _groupScaffoldKey.currentState?.openDrawer();
                 break;
               case 'New group':
                 showNewGroupDialog(context);
