@@ -38,14 +38,16 @@ class GroupCard extends StatelessWidget {
 
     return Consumer<GroupProvider>(
       builder: (context, grp, _) {
+        bool _isSelected = grp.group != null &&
+            (grp.groupId + grp.extension) == (groupId + extension);
         return ElevatedButton(
           onPressed: () {
             grp.setGroup(groupId, groupName, extension, group);
             log(group.groupId);
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.grey[850],
-            elevation: 0,
+            primary: _isSelected ? Colors.grey[800] : Colors.grey[850],
+            elevation: (_isSelected) ? 10 : 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),

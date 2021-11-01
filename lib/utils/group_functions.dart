@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:override/models/group.dart';
 import 'package:override/models/user.dart';
+import 'package:override/providers/group_provider.dart';
 import 'package:override/screens/group_screen/group_screen.dart';
 import 'package:override/shared/loading.dart';
 import 'package:override/utils/page_surf.dart';
@@ -229,5 +230,6 @@ Future<void> leaveGroup(
 
   Navigator.pop(context);
   Navigator.pop(context);
-  Navigator.pop(context);
+  GroupProvider gp = GroupProvider();
+  gp.reset();
 }

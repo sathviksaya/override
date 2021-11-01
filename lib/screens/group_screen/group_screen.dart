@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:override/models/group.dart';
 import 'package:override/providers/group_provider.dart';
 import 'package:override/screens/group_screen/events/add_edit_event.dart';
+import 'package:override/screens/group_screen/group_Info.dart';
 import 'package:override/screens/group_screen/group_tab_view.dart';
 import 'package:override/screens/group_screen/display_members.dart';
 import 'package:override/screens/group_screen/group_creds.dart';
@@ -14,17 +15,9 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class GroupScreen extends StatelessWidget {
-  // final Group group;
-  // final String groupId;
-  // final String groupName;
-  // final String extension;
-  GroupScreen({
-    Key? key,
-    // required this.groupId,
-    // required this.groupName,
-    // required this.extension,
-    // required this.group,
-  }) : super(key: key);
+  GroupScreen({Key? key}) : super(key: key);
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void showCreds(BuildContext context, int flag, Group grp) {
     showDialog(
@@ -77,6 +70,9 @@ class GroupScreen extends StatelessWidget {
         return grp.group == null
             ? _noGroupSelected()
             : Scaffold(
+                key: _scaffoldKey,
+                drawerEnableOpenDragGesture: false,
+                endDrawer: GroupInfoSection(),
                 backgroundColor: Colors.grey[900],
                 appBar: AppBar(
                   elevation: 0,
@@ -136,29 +132,39 @@ class GroupScreen extends StatelessWidget {
       );
 
   List<Widget> groupOptions(BuildContext context, Group grp) => [
-        FilterMenu(
-          options: groupMenu,
-          optionIcons: groupMenuIcons,
-          icon: Icons.more_vert,
-          onSelect: (choice) {
-            // FocusScope.of(context).requestFocus(new FocusNode());
-            switch (choice) {
-              case 'Members':
-                showCreds(context, 0, grp);
-                break;
-              case 'Group Creds':
-                showCreds(context, 1, grp);
-                break;
-              case 'Mute Events':
-                break;
-              case 'Leave Group':
-                showCreds(context, 3, grp);
-                break;
-              default:
-                break;
-            }
+        IconButton(
+          onPressed: () {
+            // Scaffold.of(context).openEndDrawer();
+            _scaffoldKey.currentState?.openEndDrawer();
           },
+          icon: Icon(
+            Icons.more_vert_rounded,
+            color: Colors.white,
+          ),
         ),
+        // FilterMenu(
+        //   options: groupMenu,
+        //   optionIcons: groupMenuIcons,
+        //   icon: Icons.more_vert,
+        //   onSelect: (choice) {
+        //     // FocusScope.of(context).requestFocus(new FocusNode());
+        //     switch (choice) {
+        //       case 'Members':
+        //         showCreds(context, 0, grp);
+        //         break;
+        //       case 'Group Creds':
+        //         showCreds(context, 1, grp);
+        //         break;
+        //       case 'Mute Events':
+        //         break;
+        //       case 'Leave Group':
+        //         showCreds(context, 3, grp);
+        //         break;
+        //       default:
+        //         break;
+        //     }
+        //   },
+        // ),
       ];
 
   Widget _noGroupSelected() => Scaffold(

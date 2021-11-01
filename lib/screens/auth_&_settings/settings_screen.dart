@@ -12,18 +12,17 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[900],
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            backButton(context),
-            displayInfo(context),
-            logoutButton(context),
-            creaters(context),
-          ],
-        ),
+    return Container(
+      color: Colors.grey[850],
+      width: 380,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          backButton(context),
+          displayInfo(context),
+          logoutButton(context),
+          creaters(context),
+        ],
       ),
     );
   }
@@ -60,23 +59,23 @@ class Settings extends StatelessWidget {
 
   Widget displayPic(BuildContext context) {
     Widget image1, image2;
-    image1 = Container(
-      color: Colors.white,
-      child: Image.network(
-        Info.imgUrl ?? 'https://dunnvision.com/files/2019/05/Profile-512.png',
-        errorBuilder: (context, _, st) {
-          return Image.network(
-              'https://dunnvision.com/files/2019/05/Profile-512.png');
-        },
-        height: MediaQuery.of(context).size.shortestSide * 0.3,
-        fit: BoxFit.cover,
-      ),
-    );
     image2 = Image.asset(
       'assets/images/user.png',
       height: MediaQuery.of(context).size.shortestSide * 0.3,
       fit: BoxFit.cover,
     );
+    image1 = Container(
+      color: Colors.white,
+      child: Image.network(
+        Info.imgUrl ?? 'https://dunnvision.com/files/2019/05/Profile-512.png',
+        errorBuilder: (context, _, st) {
+          return image2;
+        },
+        height: MediaQuery.of(context).size.shortestSide * 0.3,
+        fit: BoxFit.cover,
+      ),
+    );
+
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
@@ -90,19 +89,33 @@ class Settings extends StatelessWidget {
     );
   }
 
-  Widget backButton(BuildContext context) => Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            child: IconButton(
-              color: Colors.white,
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+  Widget backButton(BuildContext context) => Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[800],
+        ),
+        child: Row(
+          children: [
+            SizedBox(width: 10),
+            Text(
+              'Settings',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 17,
+              ),
             ),
-          ),
-        ],
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: IconButton(
+                color: Colors.white,
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ],
+        ),
       );
 
   Widget creaters(BuildContext context) => Padding(

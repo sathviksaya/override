@@ -37,8 +37,11 @@ class MemberCard extends StatelessWidget {
       child: Image.network(
         imgUrl,
         errorBuilder: (context, _, st) {
-          return Image.network(
-              'https://dunnvision.com/files/2019/05/Profile-512.png');
+          return Image.asset(
+            'assets/images/user.png',
+            height: 50,
+            fit: BoxFit.cover,
+          );
         },
         height: 50,
         fit: BoxFit.cover,
@@ -110,13 +113,14 @@ class MemberCard extends StatelessWidget {
           vertical: 2,
         ),
         decoration: BoxDecoration(
-          color: Colors.green[100],
+          // color: Colors.green[100],
           borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.greenAccent),
         ),
         child: Text(
           "Admin",
           style: GoogleFonts.roboto(
-            color: Colors.green,
+            color: Colors.greenAccent,
             fontSize: 10,
             fontWeight: FontWeight.w300,
           ),

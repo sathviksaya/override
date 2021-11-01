@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:override/screens/widgets/sign_in_button.dart';
 import 'package:override/utils/google_auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -36,74 +37,9 @@ class _AuthState extends State<Auth> {
   }
 
   Widget signInButton(BuildContext context) => SizedBox(
-        height: 80,
-        width: 250,
-        child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MouseRegion(
-              onEnter: (p) {
-                setState(() {
-                  hover = true;
-                });
-              },
-              onExit: (p) {
-                setState(() {
-                  hover = false;
-                });
-              },
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  elevation: hover ? 10 : 0,
-                  primary: Colors.transparent,
-                  // shadowColor: Colors.white38,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  padding: EdgeInsets.all(0),
-                ),
-                onPressed: () async {
-                  await signInWithGoogle(context);
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: hover ? 25 : 20,
-                    vertical: hover ? 20 : 15,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    gradient: hover
-                        ? LinearGradient(
-                            colors: [
-                              Colors.white,
-                              Colors.grey[200]!,
-                            ],
-                          )
-                        : null,
-                    border: Border.all(color: Colors.white),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Image.asset(
-                        "assets/images/google.png",
-                        height: 20,
-                      ),
-                      const SizedBox(width: 15),
-                      Text(
-                        "Sign in with Google",
-                        style: TextStyle(
-                          color: hover ? Colors.black87 : Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+        height: 55,
+        width: 180,
+        child: SignInButton(onPressed: signInWithGoogle),
       );
 
   Widget heading() => Padding(
